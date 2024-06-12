@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    --main_bg : #fff ;
+    --page_color : #f7f7fb;
+    --input_color : #f0f2f5;
+    --line_color : #f7f7fb;
+    --primary_bg : red;
+    --single_color : rgba(109 , 40 ,209,1);
+    --secondary_bg : #28353e;
+    --hober_clr : #f0f2f5;
+    --blur : rgba(255 , 255 ,255,0.8);
+    --text_color : #333;
+    --primary_color : #1fa0ef;
+    --secondary_color : #848f95;
+    --title_color : #66717f;
+    --black : #29313d;
+    --white : #fff;
+    --green : #21d997;
+    --blue : #5093f3;
+    --red : #e54953;
+    --yellow : #d9a94a;
+    --purple-100 : #f3e8ff;
+    --pink-100 : #fce7f3;
+    --cyan-100 : #cffafe;
+}
+
+
+@font-face {
+    font-family: "Gilory Regular";
+    src: url(/src/assets/fonts/Gilroy-Regular.ttf);
+}
+@font-face {
+    font-family: "Gilory Medium";
+    src: url(/src/assets/fonts/Gilroy-Medium.ttf);
+}
+@font-face {
+    font-family: "Gilory SemiBold";
+    src: url(/src/assets/fonts/Gilroy-SemiBold.ttf);
+}
+@font-face {
+    font-family: "Gilory Bold";
+    src: url(/src/assets/fonts/Gilroy-Bold.ttf);
+}
+@font-face {
+    font-family: "Gilory ExtraBold";
+    src: url(/src/assets/fonts/Gilroy-ExtraBold.ttf);
+}
+@font-face {
+    font-family: "Gilory Black";
+    src: url(/src/assets/fonts/Gilroy-Black.ttf);
+}
+@font-face {
+    font-family: "Gilory Light";
+    src: url(/src/assets/fonts/Gilroy-Light.ttf);
+}
