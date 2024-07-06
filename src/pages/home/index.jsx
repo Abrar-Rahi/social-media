@@ -10,15 +10,11 @@ const Home = () => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <div className='grid grid-cols-[1fr,2fr,1fr] gap-5 pt-10 px-10'>
-        <div className='shadow-lg'>
-          <LeftPart/>
-        </div>
-        <div>
+       
+        <div className=''>
           <MiddlePart/>
         </div>
-        <div>right part</div>
-      </div>
+      
     </>
   )
 }

@@ -1,13 +1,13 @@
 function Feeling() {
   return (
     <svg width={24} height={24} fill="#333" viewBox="0 0 24 24">
-      <g fillrule="evenodd">
+      <g fillRule="evenodd">
         <path
           d="M460.785 169.5c.49 0 .841.476.712.957-.623 2.324-2.837 4.043-5.473 4.043-2.636 0-4.85-1.719-5.473-4.043-.13-.48.222-.957.712-.957h9.522z"
           transform="translate(-444 -156)"
         />
         <path
-          fillrule="nonzero"
+          fillRule="nonzero"
           d="M467.524 168c0 6.351-5.149 11.5-11.5 11.5s-11.5-5.149-11.5-11.5 5.149-11.5 11.5-11.5 11.5 5.149 11.5 11.5zm-2 0a9.5 9.5 0 10-19 0 9.5 9.5 0 0019 0z"
           transform="translate(-444 -156)"
         />

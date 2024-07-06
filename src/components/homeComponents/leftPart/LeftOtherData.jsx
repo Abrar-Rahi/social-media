@@ -1,20 +1,47 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import SettingOption from './settingOption'
+import OutSideClick from '../../../functions/click'
 
 const LeftOtherData = ({ data }) => {
 
     const IconData = data.icon
+    
+    const [settingPopup,setSettingPopup] = useState(false)
+    const clickOutside = useRef(null)
+
+    OutSideClick(clickOutside, ()=>{
+        setSettingPopup(false)
+    })
 
     return (
-        <div>
-            <div className='flex items-center gap-x-2 mb-8 group hover:bg-black cursor-pointer px-6 py-3 rounded-full w-3/4 mx-auto transition-all ease-linear duration-300'>
-                <div className='group-hover:text-white transition-all ease-linear duration-300'>
-                    <IconData />
+        <>
+            {data.title == "Settings" ?
+                <div className='relative'>
+                    <div onClick={()=>setSettingPopup(true)} className={`flex w-12 h-12 lg:h-auto items-center justify-center lg:justify-normal lg:gap-x-2 lg:mb-8 group hover:bg-black cursor-pointer lg:px-6 lg:py-3 rounded-full lg:w-auto lg:mx-auto transition-all ease-linear duration-300 ${settingPopup && 'bg-black cursor-not-allowed'}`}>
+                        <div className={`group-hover:text-white transition-all ease-linear duration-300 ${settingPopup && 'text-white'}`}>
+                            <IconData />
+                        </div>
+                        <div className='hidden lg:block'>
+                            <p className={`font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300 ${settingPopup && 'text-white'}`}>{data.title}</p>
+                        </div>
+                    </div>
+                    {settingPopup && <div ref={clickOutside} className='absolute top-[52px] left-[-136px] lg:left-[40px] '><SettingOption/></div>}
                 </div>
-                <div>
-                    <p className='font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300'>{data.title}</p>
+                :
+    
+            <NavLink to={data.to}>
+                <div className='flex w-12 h-12 lg:h-auto items-center justify-center lg:justify-normal lg:gap-x-2 lg:mb-8 group hover:bg-black cursor-pointer lg:px-6 lg:py-3 rounded-full lg:w-auto lg:mx-auto transition-all ease-linear duration-300'>
+                    <div className='group-hover:text-white transition-all ease-linear duration-300'>
+                        <IconData />
+                    </div>
+                    <div className='hidden lg:block'>
+                        <p className='font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300'>{data.title}</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </NavLink>
+    }
+        </>
     )
 }
 

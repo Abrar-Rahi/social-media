@@ -1,25 +1,29 @@
-export const SearchIcon = () => {
+export const List = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={20}
-      height={20}
+      width={18}
+      height={18}
       viewBox="0 0 24 24"
       fill="none"
     >
       <path
-        d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+        d="M3 7H21"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
       <path
-        d="M22 22L20 20"
+        d="M3 12H21"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        strokeLinejoin="round"
+      />
+      <path
+        d="M3 17H21"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );

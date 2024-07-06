@@ -6,15 +6,16 @@ import { LeftData } from './Data'
 const LeftPart = () => {
     return (
         <>
-            <div>
-                <LeftProfile />
-            </div>
-            <div className='mt-10'>
-                {LeftData.map((item, index) => (
+            <div className='flex flex-col gap-y-10'>
+                <div>
+                    <LeftProfile />
+                </div>
+                <div className='lg:mx-auto'>
+                    {LeftData.map((item, index) => (
 
-                    <LeftOtherData key={index} data={item} />
-                ))}
-
+                        <LeftOtherData key={index} data={item} />
+                    ))}
+                </div>
             </div>
         </>
     )
