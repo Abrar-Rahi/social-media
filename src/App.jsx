@@ -12,33 +12,40 @@ import Login from './pages/login';
 import NotLogInUser from './privateRoute/NotLogInUser';
 import LoggedInUser from './privateRoute/LoggedInUser';
 import RootLayout from './components/RootLayout';
-import FriendsPage from './pages/FriendsPage';
 import 'swiper/css';
+import ActivePage from './pages/home/ActivePage';
+import ForgetPassword from './pages/forgetPassword';
 import PostPopup from './components/homeComponents/middlePart/PostPopup';
+import { useState } from 'react';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route element={< LoggedInUser />}>
-        <Route element={< RootLayout />}>
-          <Route path="/" element={< Home />}></Route>
-          <Route path="/friends" element={< FriendsPage/>}></Route>
-        </Route>
-      </Route>
-      <Route element={<NotLogInUser />}>
-        <Route path="/registration" element={< Registration />}></Route>
-        <Route path="/login" element={< Login />}></Route>
-      </Route>
-    </Route>
-  )
-);
+
 
 
 function App() {
 
+  const [postVisible,setPostVisible] = useState(false)
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route element={< LoggedInUser />}>
+          <Route element={< RootLayout />}>
+            <Route path="/" element={< Home setPostVisible={setPostVisible}/>}></Route>
+            <Route path="/varification/:token" element={< ActivePage />}></Route>
+          </Route>
+        </Route>
+        <Route element={<NotLogInUser />}>
+          <Route path="/registration" element={< Registration />}></Route>
+          <Route path="/login" element={< Login />}></Route>
+        </Route>
+        <Route path="/forgetPassword" element={< ForgetPassword />}></Route>
+      </Route>
+    )
+  );
   return (
     <>
-      <PostPopup/>
+    {postVisible && <PostPopup setPostVisible={setPostVisible}/>}
+      
       <RouterProvider router={router} />
 
     </>

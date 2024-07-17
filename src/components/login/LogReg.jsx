@@ -93,7 +93,13 @@ const Logreg = () => {
                         }
 
                     </div>
-                    <p className='font-gilroyNormal text-center'>Don't Have An Account ? <Link className='font-gilroySemiBold text-blue underline' to={"/registration"}>Sign UP</Link></p>
+                    <div className='flex items-center justify-between gap-x-3'>
+                    <p className='font-gilroyNormal text-center'>Don't Have An Account ? <Link className='font-gilroySemiBold text-blue underline' to={"/registration"}>Sign UP</Link>
+                    </p>
+
+                     <Link className='font-gilroySemiBold text-blue underline' to={"/forgetPassword"}>Forget Password?</Link>
+                    
+                    </div>
                 </form>
             </div>
             <div>

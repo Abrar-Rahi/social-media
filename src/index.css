@@ -59,3 +59,31 @@
     font-family: "Gilory Light";
     src: url(/src/assets/fonts/Gilroy-Light.ttf);
 }
+
+.bgPost{
+  height: 350px;
+  width: 100%;
+  background-size: cover;  
+}
+.bgPost textarea{
+    text-align: center;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    line-height: 45px;
+    font-weight: 600;
+}
+
+
+.postError{
+    animation: postAni 0.3s forwards;
+}
+@keyframes postAni{
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
