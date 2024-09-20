@@ -31,6 +31,7 @@ const ActivePage = () => {
            localStorage.setItem("user", JSON.stringify({...userInfo, varified: true}))
            dispatch(logInUsers({...userInfo, varified: true}))
            setTimeout(()=>{
+             setSuccess("")
               navigate("/")
            },3000)
         } catch (error) {

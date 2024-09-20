@@ -29,7 +29,7 @@ const Logreg = () => {
         if (logInMutation?.data) {
             toast.success(logInMutation.data?.message);
             const {message , ...rest} = logInMutation.data
-            console.log(rest);
+            
             localStorage.setItem("user", JSON.stringify(rest))
             dispatch(logInUsers(rest))
             setTimeout(() => {

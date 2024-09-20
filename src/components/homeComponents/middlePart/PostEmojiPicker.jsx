@@ -59,7 +59,7 @@ const PostEmojiPicker = ({ postText, setPostText, changePart,imgBackground, setI
                         <div onClick={() => setEmojiPicker((prev) => !prev)} className='cursor-pointer'>
                             <Feeling />
                         </div>
-                        <div className='absolute top-7 right-0 z-10'>
+                        <div className='absolute top-7 -right-48 z-10'>
                             {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
                         </div>
                     </div>
@@ -85,7 +85,7 @@ const PostEmojiPicker = ({ postText, setPostText, changePart,imgBackground, setI
                             <div onClick={() => setEmojiPicker((prev) => !prev)} className='cursor-pointer'>
                                 <Feeling />
                             </div>
-                            <div className='absolute bottom-7 right-0'>
+                            <div className='absolute bottom-7 -right-48'>
                                 {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
                             </div>
                         </div>

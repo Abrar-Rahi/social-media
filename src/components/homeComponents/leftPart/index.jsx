@@ -4,21 +4,25 @@ import LeftOtherData from './LeftOtherData'
 import { LeftData } from './Data'
 
 const LeftPart = () => {
-    return (
-        <>
-            <div className='flex flex-col gap-y-10'>
-                <div>
-                    <LeftProfile />
-                </div>
-                <div className='lg:mx-auto'>
-                    {LeftData.map((item, index) => (
+  return (
+    <>
+      <div className="fixed top-0 left-0 lg:w-[27%] xl:w-[22%] w-full max-w-lg mx-auto bg-white shadow-lg h-full rounded-lg p-6 ">
+        {/* Profile Section */}
+        <div className="flex flex-col items-center gap-y-3">
+          <LeftProfile />
+        </div>
 
-                        <LeftOtherData key={index} data={item} />
-                    ))}
-                </div>
-            </div>
-        </>
-    )
+        {/* Data Section */}
+        <div className="mt-8">
+          {LeftData.map((item, index) => (
+            <LeftOtherData key={index} data={item} />
+          ))}
+        </div>
+      </div>
+
+
+    </>
+  )
 }
 
 export default LeftPart

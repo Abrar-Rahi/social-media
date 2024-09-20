@@ -5,7 +5,7 @@ import MiddlePart from '../../components/homeComponents/middlePart'
 import ReAuth from '../../components/reAutentication'
 import { useSelector } from 'react-redux'
 
-const Home = ({setPostVisible}) => {
+const Home = ({setPostVisible, posts}) => {
   const userInfo = useSelector((state)=> state.registration.userInfo)
   return (
     <>
@@ -18,7 +18,7 @@ const Home = ({setPostVisible}) => {
       }
       
         <div>
-          <MiddlePart setPostVisible={setPostVisible}/>
+          <MiddlePart setPostVisible={setPostVisible} posts={posts}/>
         </div>
       
     </>

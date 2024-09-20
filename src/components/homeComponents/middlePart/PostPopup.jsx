@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CircleCloseIcon } from '../../../svg/CircleClose'
 import PostAddToYourPost from './PostAddToYourPost'
-
+import profileImg from "../../../assets/defaultImage/avatar.png"
 import PostEmojiPicker from './PostEmojiPicker'
 import PostImageViewer from './PostImageViewer'
 import OutSideClick from '../../../functions/click'
@@ -43,18 +43,18 @@ const PostPopup = ({ setPostVisible }) => {
                     token: userInfo.token
                 }).unwrap()
             }
-            else if(image && image.length){
-                const postImage = image.map((item)=> dataURItoBlob(item))
+            else if (image && image.length) {
+                const postImage = image.map((item) => dataURItoBlob(item))
                 const path = `${userInfo.userName}/post_images`
-                const formData = new FormData()
+                let formData = new FormData()
                 formData.append("path", path)
-                postImage.forEach((img)=>{
+                postImage.forEach((img) => {
                     formData.append("file", img)
                 })
                 const responseImage = await uploadImage({
                     formData,
                     path,
-                    token : userInfo.token
+                    token: userInfo.token
                 }).unwrap()
 
                 response = await createPost({
@@ -65,9 +65,9 @@ const PostPopup = ({ setPostVisible }) => {
                     user: userInfo.id,
                     token: userInfo.token
                 }).unwrap()
-                
+
             }
-            else if(postText){
+            else if (postText) {
                 response = await createPost({
                     type: null,
                     image: null,
@@ -76,19 +76,19 @@ const PostPopup = ({ setPostVisible }) => {
                     user: userInfo.id,
                     token: userInfo.token
                 }).unwrap()
-            }else{
+            } else {
                 setError("please choose a file");
                 setLoading(false)
                 return
             }
 
             if (response.status === "done") {
-                setTimeout(() => {
-                    setLoading(false)
-                    setPostText("")
-                    setImgBackground("")
-                    setPostVisible(false)
-                }, 2000)
+
+                setLoading(false)
+                setPostText("")
+                setImgBackground("")
+                setPostVisible(false)
+
             }
 
         } catch (error) {
@@ -101,7 +101,7 @@ const PostPopup = ({ setPostVisible }) => {
     return (
         <div className='w-full h-screen bg-blur z-20 absolute top-0 left-0 flex items-center justify-center'>
             <div ref={postPopupRef} className='relative w-2/6 bg-white shadow-md rounded-lg'>
-                {error && <PostError error={error} setError={setError}/>}
+                {error && <PostError error={error} setError={setError} />}
                 <div className='border-b border-title_color p-5  relative'>
                     <h3 className='font-gilroyBold text-lg text-black text-center'>CreatePost</h3>
                     <div onClick={() => setPostVisible(false)} className='absolute top-5 right-4 cursor-pointer'>
@@ -110,12 +110,12 @@ const PostPopup = ({ setPostVisible }) => {
                 </div>
                 <div className=' px-3 py-5'>
                     <div className='flex items-center gap-x-2'>
-                        <div className='w-10 h-10 bg-secondary_color rounded-full'></div>
-                        <h4 className='font-gilroyBold text-lg'>Abrar Bin Enayet</h4>
+                        <img src={userInfo.profilePicture || profileImg} className='w-10 h-10 bg-secondary_color rounded-full' />
+                        <h4 className='font-gilroyBold text-lg'>{userInfo.userName}</h4>
                     </div>
                     {imgPopup ?
                         <>
-                            <PostImageViewer postText={postText} setPostText={setPostText} image={image} setImage={setImage} imgPopup={imgPopup} setImgPopupt={setImgPopupt} setError={setError}/>
+                            <PostImageViewer postText={postText} setPostText={setPostText} image={image} setImage={setImage} imgPopup={imgPopup} setImgPopupt={setImgPopupt} setError={setError} />
                             <div>
                                 <PostAddToYourPost imgPopup={imgPopup} setImgPopupt={setImgPopupt} />
                             </div>

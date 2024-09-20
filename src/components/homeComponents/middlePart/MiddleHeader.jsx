@@ -20,7 +20,7 @@ const MiddleHeader = () => {
 
     return (
         <>
-            <div className='flex items-center justify-between '>
+            <div className='flex items-center justify-between bg-white shadow-md px-3 py-8 rounded-md'>
                 <div className='w-3/5 hidden lg:block font-gilroyBold text-2xl'>Feed</div>
                 <div className='w-14 h-14 rounded-full bg-cyan-100 lg:hidden'></div>
                 <div className='w-4/6 flex justify-between lg:hidden'>
@@ -34,7 +34,7 @@ const MiddleHeader = () => {
                         <div className='text-secondary_color '> <SearchIcon /> </div>
                         
                         <div>
-                            <input type="text" placeholder='Search' className='focus:outline-none w-full font-gilroyNormal hidden lg:block' />
+                            <input type="text" placeholder='Search' className='focus:outline-none w-full font-gilroyNormal hidden lg:block bg-transparent' />
                         </div>
                         
                     </div>
@@ -43,7 +43,7 @@ const MiddleHeader = () => {
                         <div className='text-white '> <SearchIcon /> </div>
                         
                         <div>
-                            <input type="text" placeholder='Search' className='focus:outline-none w-full font-gilroyNormal hidden lg:block' />
+                            <input type="text" placeholder='Search' className='focus:outline-none w-full font-gilroyNormal hidden lg:block bg-transparent' />
                         </div>
                         
                     </div>
