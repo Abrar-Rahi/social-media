@@ -29,22 +29,18 @@ export const authApi = createApi({
       }),
     }),
     varifiedUser: builder.mutation({
-      query: ({token,userToken}) => ({
+      query: ({token}) => ({
         url: "/api/v1/auth/varification",
         method: "POST",
         body : {token},
-        headers : {
-          Authorization : `Bearer ${userToken}`
-        }
+        
       }),
     }),
     reVarification: builder.mutation({
       query: (token) => ({
         url: "/api/v1/auth/reVarification",
         method: "POST",
-        headers : {
-          Authorization : `Bearer ${token}`
-        }
+        
       }),
     }),
     matchUser: builder.mutation({
@@ -76,13 +72,11 @@ export const authApi = createApi({
       }),
     }),
     createPost: builder.mutation({
-      query: ({type,image,text,background,user,token}) => ({
+      query: ({type,image,text,background,user}) => ({
         url: "/api/v1/post/createPost",
         method: "POST",
         body : {type,image,text,background,user},
-        headers : {
-          Authorization : `Bearer ${token}`
-        }
+        
       }),
       transformResponse : (response)=> ({
           status : "done",
@@ -90,19 +84,59 @@ export const authApi = createApi({
       })
     }),
     uploadImage: builder.mutation({
-      query: ({formData,path,token}) => ({
+      query: ({formData}) => ({
         url: "/api/v1/upload/uploadImage",
         method: "POST",
         body : formData,
-        headers : {
-          Authorization : `Bearer ${token}`
-        }
+        
       }),
     }),
+    
     getAllPost: builder.query({
       query: () => "/api/v1/post/allPostData"
+    }),
+    getUserProfile: builder.query({
+      query: (user) => `/api/v1/auth/getUser/${user}`
+    }),
+
+    imageList: builder.mutation({
+      query: ({path, sort, max}) => ({
+        url: "/api/v1/upload/imageList",
+        method: "POST",
+        body : {path, sort, max},
+        
+      }),
+    }),
+    uploadProfilePicture: builder.mutation({
+      query: ({url}) => ({
+        url: "/api/v1/auth/updateProfilePicture",
+        method: "PUT",
+        body : {url}
+      }),
+      transformResponse : (response)=> ({
+        status : "done",
+        data : response
+    })
+    }),
+    uploadCoverPicture: builder.mutation({
+      query: ({url}) => ({
+        url: "/api/v1/auth/updateCoverPicture",
+        method: "PUT",
+        body : {url}
+      }),
+      transformResponse : (response)=> ({
+        status : "done",
+        data : response
+    })
+    }),
+    updateDetails: builder.mutation({
+      query: ({userInformation}) => ({
+        url: "/api/v1/auth/updateDetails",
+        method: "PUT",
+        body : {userInformation}
+      })
     }),
   }),
 })
 
-export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery } = authApi
+export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation } = authApi

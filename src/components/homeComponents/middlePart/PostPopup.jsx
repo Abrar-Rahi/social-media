@@ -11,13 +11,13 @@ import { PulseLoader } from 'react-spinners'
 import PostError from './PostError'
 import dataURItoBlob from '../../../helpers/dataURItoBlob'
 
-const PostPopup = ({ setPostVisible }) => {
+const PostPopup = ({ setPostVisible,postVisible }) => {
 
     const [createPost] = useCreatePostMutation()
     const [uploadImage] = useUploadImageMutation()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
-    const userInfo = useSelector((state) => state.registration.userInfo)
+    const userInfo = useSelector((state) => state.userInformation.userInfo)
 
     const [postText, setPostText] = useState("")
     const [image, setImage] = useState([])
@@ -28,6 +28,18 @@ const PostPopup = ({ setPostVisible }) => {
     OutSideClick(postPopupRef, () => {
         setPostVisible(false)
     })
+
+    useEffect(()=>{
+     const addClass = document.body
+     if(postVisible){
+        addClass.classList.add("no-scroll")
+    }else{
+         addClass.classList.remove("no-scroll")
+     }
+     return ()=>{
+        addClass.classList.remove("no-scroll")
+     }
+    },[postVisible])
 
     let handlePostSubmission = async () => {
         try {
@@ -45,7 +57,7 @@ const PostPopup = ({ setPostVisible }) => {
             }
             else if (image && image.length) {
                 const postImage = image.map((item) => dataURItoBlob(item))
-                const path = `${userInfo.userName}/post_images`
+                const path = `${userInfo.userName.replace(/\s+/g,"_")}/post_images`
                 let formData = new FormData()
                 formData.append("path", path)
                 postImage.forEach((img) => {
@@ -99,8 +111,8 @@ const PostPopup = ({ setPostVisible }) => {
 
 
     return (
-        <div className='w-full h-screen bg-blur z-20 absolute top-0 left-0 flex items-center justify-center'>
-            <div ref={postPopupRef} className='relative w-2/6 bg-white shadow-md rounded-lg'>
+        <div className='w-full h-screen bg-blur z-[60] fixed top-0 left-0 flex items-center justify-center'>
+            <div ref={postPopupRef} className='relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] bg-white shadow-md rounded-lg'>
                 {error && <PostError error={error} setError={setError} />}
                 <div className='border-b border-title_color p-5  relative'>
                     <h3 className='font-gilroyBold text-lg text-black text-center'>CreatePost</h3>
@@ -108,7 +120,7 @@ const PostPopup = ({ setPostVisible }) => {
                         <CircleCloseIcon />
                     </div>
                 </div>
-                <div className=' px-3 py-5'>
+                <div className=' px-3 py-5  '>
                     <div className='flex items-center gap-x-2'>
                         <img src={userInfo.profilePicture || profileImg} className='w-10 h-10 bg-secondary_color rounded-full' />
                         <h4 className='font-gilroyBold text-lg'>{userInfo.userName}</h4>

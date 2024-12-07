@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import profileImg from "../../../assets/defaultImage/avatar.png"
+import coverImg from "../../../assets/defaultImage/defaultcover.jpg"
 import { formatDistance, subDays } from 'date-fns'
 import { Dot } from '../../../svg/Dots';
 import { Like } from '../../../svg/Like';
@@ -12,12 +13,16 @@ import Feeling from '../../../svg/Feeling';
 import { Media } from '../../../svg/Media';
 import EmojiPicker from 'emoji-picker-react';
 import { Cross } from '../../../svg/Cross';
+import PostMenu from './PostMenu';
+import StringWithEllipsis from './StringWithEllipsis';
 
 const ShowPost = ({ post }) => {
-    const userInfo = useSelector((state) => state.registration.userInfo)
+    const userInfo = useSelector((state) => state.userInformation.userInfo)
+
 
     const [showEmojis, setShowEmojis] = useState(false); //for react button
     const [emojiPicker, setEmojiPicker] = useState(false); //for imojiPicker components Implement 
+    const [showMenu, setShowMenu] = useState(false); //for react button
     const [cursorPosition, setCursorPosition] = useState("")
     const [commentText, setCommentText] = useState("")
     const [commentImage, setCommentImage] = useState("")
@@ -78,67 +83,103 @@ const ShowPost = ({ post }) => {
         }
 
     }
-    console.log(commentImage);
 
     if (!post || !post.user) {
         return null; // or render some fallback UI
     }
-
+    
 
     return (
 
-        <div className='w-full shadow-md rounded-md px-3 py-5 mb-5'>
-            <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-x-3'>
+        <div className='w-full shadow-md rounded-md px-2 sm:px-3 py-5 mb-5'>
+            <div className='flex items-center justify-between '>
+                <div className='flex items-center gap-x-2 '>
                     <div className='w-12 h-12 rounded-full overflow-hidden'>
-                        <Link to={`/profile/${post.user.userName}`}>
+                        <Link to={`/profile/${post?.user?.userName}`}>
                             <img
                                 className='w-full h-full object-cover'
-                                src={post.user.profilePicture || profileImg}
+                                src={post?.user?.profilePicture || profileImg}
                                 alt="profileImg" />
                         </Link>
                     </div>
                     <div>
-                        <h4 className='font-gilroyMedium text-base '>{post.user.userName}</h4>
-                        <p className='font-gilroyNormal text-sm text-secondary_color'>{formatDistance(post.createdAt, new Date())}</p>
+                        <div className='flex items-center gap-x-1 '>
+                            <h4 className='font-gilroySemiBold text-xs sm:text-base'>
+                            <StringWithEllipsis text={post?.user?.userName} maxLength={15}/>
+                            </h4>
+                            {post?.type === "profilePicture" &&
+                                <span className='font-gilroyNormal text-xs sm:text-base text-secondary_color'>updated {post?.user?.gender === "male" ? "his" : "her"} Profile Picture</span>
+                            }
+                            {post?.type === "coverPicture" &&
+                                <span className='font-gilroyNormal text-xs sm:text-base text-secondary_color'>updated {post?.user?.gender === "male" ? "his" : "her"} cover Picture</span>
+                            }
+                        </div>
+                        <p className='font-gilroyNormal text-xs sm:text-sm text-secondary_color'>{formatDistance(post?.createdAt, new Date(), { addSuffix: true })}</p>
                     </div>
                 </div>
-                <div className='text-blue cursor-pointer w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-hober_clr ease-linear transition-all duration-100'>
-                    <Dot />
+                <div className='relative'>
+                    <div onClick={() => setShowMenu(true)} className='text-blue cursor-pointer  w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center hover:bg-hober_clr ease-linear transition-all duration-100'>
+                        <Dot />
+                    </div>
+                    {showMenu &&
+
+                        <div>
+                            <PostMenu setShowMenu={setShowMenu} postId={post?.user?._id} userId={userInfo.id} postImeges={post?.image} />
+                        </div>
+                    }
                 </div>
             </div>
             <>
-                {post.background ?
-                    <div className='h-[350px] flex items-center justify-center mt-5 overflow-y-scroll px-5 pb-5'
+                {post?.background ?
+                    <div className='h-[350px] flex items-center justify-center text-center overflow-y-scroll p-3 sm:p-5 '
                         style={{
-                            backgroundImage: `url(${post.background})`,
+                            backgroundImage: `url(${post?.background})`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                             backgroundPosition: "center"
                         }}>
-                        <h4 className='font-gilroyMedium text-3xl text-white '>{post.text}</h4>
+                        <h4 className='font-gilroyMedium text-xl sm:text-3xl text-white '>{post?.text}</h4>
                     </div>
                     :
-                    <h4 className='font-gilroyMedium text-xl text-black my-5'>{post.text}</h4>
+                    <h4 className='font-gilroyMedium text-base sm:text-xl text-black my-5'>{post?.text}</h4>
                 }
-                {post.image && post.image.length &&
-                    <>
-                        <div className={`relative w-full h-full ${post.image.length === 2 ? "grid grid-cols-2 gap-2" : post.image.length === 3 ? "grid grid-cols-2 gap-2" : post.image.length === 4 ? "grid grid-cols-2 gap-2" : post.image.length >= 5 && "grid grid-cols-2 gap-2"}`}>
-                            {post.image.slice(0, 4).map((item, index) => (
-                                <img key={index} src={item.url} alt="postImage" className={`object-cover w-full h-full ${post.image.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : post.image.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
-                            ))}
-
-                            {post.image.length >= 5 &&
-                                <div className='absolute bottom-[100px] right-[150px] w-20 h-20 bg-white text-black rounded-full flex items-center justify-center'>
-                                    <h5 className='font-gilroyBold text-5xl'>+{post.image.length - 4}</h5>
+                {
+                    post.type === "profilePicture" ?
+                        <>
+                            <div className=''>
+                                <div className='w-full h-[280px] object-cover overflow-hidden'>
+                                    <img src={post?.user?.coverPicture || coverImg} alt="coverPicture" />
                                 </div>
-                            }
-                        </div>
-                    </>
+                                <div>
+                                    <img
+                                        className='w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] rounded-full mx-auto object-cover -mt-40'
+                                        src={post?.user?.profilePicture || profileImg}
+                                        alt="profileImg" />
+                                </div>
+                            </div>
+                        </>
+                        :
+                        post?.image && post?.image?.length &&
+                        <>
+                            <div className={`relative w-full h-full md:h-[500px] lg:h-full ${post?.image?.length === 2 ? "grid grid-cols-2 gap-2" : post?.image?.length === 3 ? "grid grid-cols-2 gap-2" : post?.image?.length === 4 ? "grid grid-cols-2 gap-2" : post?.image?.length >= 5 && "grid grid-cols-2 gap-2"}`}>
+                                {post?.image?.slice(0, 4).map((item, index) => (
+                                    <img key={index} src={item?.url} alt="postImage" className={`object-cover w-full h-full ${post?.image?.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : post?.image?.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
+                                ))}
+                                
+
+                                <div className='absolute bottom-10 right-10'>
+                                {post?.image?.length >= 5 &&
+                                    <div className=' w-12 h-12 sm:w-20 sm:h-20 bg-white text-black rounded-full flex items-center justify-center'>
+                                        <h5 className='font-gilroyBold text-xl sm:text-5xl'>+{post?.image?.length - 4}</h5>
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        </>
                 }
             </>
 
-            <div className='text-end my-2 font-gilroyMedium mr-2'>
+            <div className='text-end my-2 font-gilroyMedium text-sm sm:text-lg mr-2'>
                 <span>12 comments</span>
             </div>
 
@@ -147,15 +188,15 @@ const ShowPost = ({ post }) => {
                 <button
                     onMouseEnter={() => setShowEmojis(true)}
                     onMouseLeave={() => setShowEmojis(false)}
-                    className="flex items-center justify-center gap-x-2 px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
+                    className="flex items-center justify-center gap-x-1 sm:gap-x-2 px-2 sm:px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
                     <span className="my-like-icon-class">
                         <Like />
                     </span>
-                    <span className="font-gilroyMedium">Like</span>
+                    <span className="font-gilroyMedium text-sm sm:text-base">Like</span>
                 </button>
 
                 <div
-                    className={`absolute  left-3 -top-[42px] bg-transparent  transition-all duration-300 ${showEmojis ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    className={` absolute left-0 sm:left-3 -top-[42px] bg-transparent  transition-all duration-300 ${showEmojis ? 'opacity-100 visible' : 'opacity-0 invisible'
                         }`}
                     onMouseEnter={() => setShowEmojis(true)}
                     onMouseLeave={() => setShowEmojis(false)}
@@ -166,18 +207,18 @@ const ShowPost = ({ post }) => {
                     </span>
                 </div>
 
-                <button onClick={() => textRef.current.focus()} className="flex items-center justify-center gap-x-2 px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
+                <button onClick={() => textRef.current.focus()} className="flex items-center justify-center gap-x-1 sm:gap-x-2 px-2 sm:px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
                     <span className="my-comment-icon-class">
                         <Comment />
                     </span>
-                    <span className="font-gilroyMedium">Comment</span>
+                    <span className="font-gilroyMedium text-sm sm:text-base">Comment</span>
                 </button>
 
-                <button className="flex items-center justify-center gap-x-2 px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
+                <button className="flex items-center justify-center gap-x-1 sm:gap-x-2 px-2 sm:px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
                     <span className="my-share-icon-class">
                         <Share />
                     </span>
-                    <span className="font-gilroyMedium">Share</span>
+                    <span className="font-gilroyMedium text-sm sm:text-base">Share</span>
                 </button>
             </div>
 
@@ -186,7 +227,7 @@ const ShowPost = ({ post }) => {
                 <img
                     src={userInfo.profilePicture || profileImg}
                     alt="Profile"
-                    className="w-10 h-10 rounded-full mr-3"
+                    className="w-7 h-7 sm:w-10 sm:h-10 rounded-full mr-3"
                 />
 
                 {/* Input Field */}
@@ -200,15 +241,15 @@ const ShowPost = ({ post }) => {
                 <input
                     ref={textRef}
                     type="text"
-                    placeholder={`Comment as ${userInfo.userName}`}
-                    className="bg-transparent w-full text-text_color font-gilroyNormal placeholder:text-text_color focus:outline-none"
+                    placeholder={`Comment as ${userInfo.fName}`}
+                    className="bg-transparent w-full text-text_color font-gilroyNormal placeholder:text-text_color placeholder:text-xs sm:placeholder:text-base focus:outline-none"
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
 
                 />
 
                 {/* Icon Set */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center sm:space-x-4 space-x-1">
                     {/* Replace with your own icons */}
                     <div
                         className="relative flex items-center justify-center w-8 h-8 text-xl bg-transparent hover:bg-hober_clr rounded-full transition-all duration-200 cursor-pointer emoji-btn"
@@ -220,7 +261,7 @@ const ShowPost = ({ post }) => {
                             <Feeling />
                         </div>
 
-                        <div ref={emojiPickerRef} className='absolute bottom-11 right-0'>
+                        <div ref={emojiPickerRef} className='absolute bottom-11 -right-16'>
                             {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
                         </div>
                     </div>
@@ -234,10 +275,10 @@ const ShowPost = ({ post }) => {
 
                 </div>
                 {commentImgError && <div className='postError bg-blur absolute top-2 left-0 z-10 flex items-center justify-center  '>
-                <div className='font-gilroySemibold text-lg text-red w-[85%]'>{commentImgError}</div>
-                <button onClick={() => setCommentImgError("")} className='px-4 py-2 bg-blue text-input_color font-gilroySemiBold text-base  rounded-full'>Try Again</button>
+                    <div className='font-gilroySemibold text-lg text-red w-[85%]'>{commentImgError}</div>
+                    <button onClick={() => setCommentImgError("")} className='px-4 py-2 bg-blue text-input_color font-gilroySemiBold text-base  rounded-full'>Try Again</button>
 
-            </div>}
+                </div>}
             </div>
             {commentImage &&
                 <div className='relative w-36 h-36 mt-5 ml-2 rounded-sm overflow-hidden'>

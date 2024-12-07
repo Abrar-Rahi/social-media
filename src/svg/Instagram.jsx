@@ -3,8 +3,8 @@ export const Instagram = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="20px"
-      height="20px"
+      width="18px"
+      height="18px"
       viewBox="0 0 256 256"
       version="1.1"
       preserveAspectRatio="xMidYMid"

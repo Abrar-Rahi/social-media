@@ -1,0 +1,42 @@
+.no-scroll{
+overflow: hidden !important ;
+}
+
+/* .profileCropper .reactEasyCrop_Container{
+    margin-top: 170px;
+    height: 500px;
+} */
+
+.profileCropper .reactEasyCrop_Container img{
+     width: 100%;
+     object-fit: contain;
+}
+
+
+.profileCropper .reactEasyCrop_CropAreaGrid{
+    width: 300px !important;
+    height: 300px !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.coverCropper .reactEasyCrop_Container img{
+    width: 100%;
+    object-fit: cover;
+}
+
+/* fixed Height */
+.scrollFixed .profileLeft {
+    position: fixed;
+    width: 350.19px;
+    z-index: 10;
+}
+.scrollFixed .profileRight {
+    width: 525.31px;
+    margin-left: 365px;
+}
+.showLess .profileLeft {
+    bottom: 10px;
+}
+.showMore .profileLeft {
+    top: 66px;
+}

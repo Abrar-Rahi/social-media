@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import SettingOption from './settingOption'
 import OutSideClick from '../../../functions/click'
 
@@ -9,6 +9,7 @@ const LeftOtherData = ({ data }) => {
     
     const [settingPopup,setSettingPopup] = useState(false)
     const clickOutside = useRef(null)
+    const pageRoute = useLocation()
 
     OutSideClick(clickOutside, ()=>{
         setSettingPopup(false)
@@ -31,12 +32,12 @@ const LeftOtherData = ({ data }) => {
                 :
     
             <NavLink to={data.to}>
-                <div className='flex w-12 h-12 lg:h-auto items-center justify-center lg:justify-normal lg:gap-x-2 lg:mb-8 group hover:bg-black cursor-pointer lg:px-6 lg:py-3 rounded-full lg:w-auto lg:mx-auto transition-all ease-linear duration-300'>
-                    <div className='group-hover:text-white transition-all ease-linear duration-300'>
+                <div className={`flex w-12 h-12 lg:h-auto items-center justify-center lg:justify-normal lg:gap-x-2 lg:mb-8 group hover:bg-black cursor-pointer lg:px-6 lg:py-3 rounded-full lg:w-auto lg:mx-auto transition-all ease-linear duration-300 ${pageRoute.pathname === data.to ? "bg-black" : ""}`}>
+                    <div className={`group-hover:text-white transition-all ease-linear duration-300 ${pageRoute.pathname === data.to ? "text-white" : ""}`}>
                         <IconData />
                     </div>
                     <div className='hidden lg:block'>
-                        <p className='font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300'>{data.title}</p>
+                        <p className={`font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300 ${pageRoute.pathname === data.to ? "text-white" : ""}`}>{data.title}</p>
                     </div>
                 </div>
             </NavLink>

@@ -6,7 +6,7 @@ import { LeftData } from './Data'
 const LeftPart = () => {
   return (
     <>
-      <div className="fixed top-0 left-0 lg:w-[27%] xl:w-[22%] w-full max-w-lg mx-auto bg-white shadow-lg h-full rounded-lg p-6 ">
+      <div className="fixed top-0 left-[40px] lg:w-[22%] xl:w-[22%] w-full max-w-lg mx-auto bg-white shadow-lg h-full rounded-lg p-6 flex flex-col items-center">
         {/* Profile Section */}
         <div className="flex flex-col items-center gap-y-3">
           <LeftProfile />

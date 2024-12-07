@@ -50,7 +50,7 @@ const PostImageViewer = ({ postText, setPostText, image, setImage, imgPopup, set
                             {image.slice(0, 4).map((item, index) => (
                                 <img key={index} src={item} alt="image" className={`object-cover w-full h-full ${image.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : image.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
                             ))}
-                            
+
                             <div onClick={() => setImage([])} className='absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center cursor-pointer'>
                                 <Cross />
                             </div>

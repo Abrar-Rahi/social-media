@@ -14,7 +14,7 @@ export const LeftData = [
     {
         icon : Messages,
         title : "Messages",
-        to : "/"
+        to : "/message"
     },
     {
         icon : Friends,
@@ -24,7 +24,7 @@ export const LeftData = [
     {
         icon : Media,
         title : "Media",
-        to : "/"
+        to : "/media"
     },
     {
         icon : Settings,

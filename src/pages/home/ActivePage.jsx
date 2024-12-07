@@ -15,6 +15,7 @@ const ActivePage = () => {
     const [error,setError] = useState("")
     const {token} = useParams()
     const userInfo = useSelector((state)=> state.registration.userInfo)
+    console.log(userInfo);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 

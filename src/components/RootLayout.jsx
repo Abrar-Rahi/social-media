@@ -12,7 +12,7 @@ const RootLayout = () => {
             </div>
 
             <div>
-                <div className='sticky top-0 left-0 z-10'>
+                <div className='sticky top-0 left-0 z-50'>
                   <MiddleHeader />
                 </div>
 

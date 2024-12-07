@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
 const NotLogInUser = () => {
-    const userInfo = useSelector((state) => state.registration.userInfo)
+    const userInfo = useSelector((state) => state.userInformation.userInfo)
     
   return userInfo ? <Navigate to={'/'}/> : <Outlet/>
 }

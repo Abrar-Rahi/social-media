@@ -5,7 +5,7 @@ import { authApi } from './api/authApi'
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
-    registration : userSlice
+    userInformation : userSlice
   },
   devTools : import.meta.env.MODE !== "production",
   middleware: (getDefaultMiddleware) =>

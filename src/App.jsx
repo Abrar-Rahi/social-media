@@ -6,6 +6,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import 'react-loading-skeleton/dist/skeleton.css'
 import Registration from './pages/registration';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -18,6 +19,7 @@ import ForgetPassword from './pages/forgetPassword';
 import PostPopup from './components/homeComponents/middlePart/PostPopup';
 import { useState } from 'react';
 import { useGetAllPostQuery } from './features/api/authApi';
+import ProfilePage from './pages/profilePage';
 
 
 
@@ -36,6 +38,8 @@ function App() {
           <Route element={< RootLayout />}>
             <Route path="/" element={< Home setPostVisible={setPostVisible} posts={posts}/>}></Route>
             <Route path="/varification/:token" element={< ActivePage />}></Route>
+            <Route path="/profile" element={< ProfilePage setPostVisible={setPostVisible} posts={posts}/>}></Route>
+            <Route path="/profile/:userName" element={< ProfilePage />}></Route>
           </Route>
         </Route>
         <Route element={<NotLogInUser />}>
@@ -48,7 +52,7 @@ function App() {
   );
   return (
     <>
-    {postVisible && <PostPopup setPostVisible={setPostVisible}/>}
+    {postVisible && <PostPopup setPostVisible={setPostVisible} postVisible={postVisible} />}
       
       <RouterProvider router={router} />
 
