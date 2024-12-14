@@ -136,7 +136,49 @@ export const authApi = createApi({
         body : {userInformation}
       })
     }),
+    addFriends: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/addFriends/${id}`,
+        method: "PUT",
+      })
+    }),
+    cancelFriendReq: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/cancelFriendReq/${id}`,
+        method: "PUT",
+      })
+    }),
+    acceptFriendReq: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/acceptFriendReq/${id}`,
+        method: "PUT",
+      })
+    }),
+    deleteFriendReq: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/deleteFriendReq/${id}`,
+        method: "PUT",
+      })
+    }),
+    follow: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/follow/${id}`,
+        method: "PUT",
+      })
+    }),
+    unFollow: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/unFollow/${id}`,
+        method: "PUT",
+      })
+    }),
+    unFriend: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/unFriend/${id}`,
+        method: "PUT",
+      })
+    }),
   }),
 })
 
-export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation } = authApi
+export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation, useAddFriendsMutation, useCancelFriendReqMutation, useAcceptFriendReqMutation, useDeleteFriendReqMutation, useFollowMutation, useUnFollowMutation, useUnFriendMutation } = authApi

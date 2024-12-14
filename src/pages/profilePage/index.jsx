@@ -28,7 +28,7 @@ const ProfilePage = ({posts,setPostVisible}) => {
   const [scroll,setScroll] = useState()
 
   const ScrollResponsive = useMediaQuery({
-    query: '(min-width: 1200px)'
+    query: '(min-width: 1620px)'
   })
 
   const getScroll = ()=>{
@@ -57,6 +57,7 @@ const ProfilePage = ({posts,setPostVisible}) => {
 
 
   const profileVisitor = profile?._id !== userInfo.id ? true : false ;
+
   
 
   return (
@@ -75,7 +76,7 @@ const ProfilePage = ({posts,setPostVisible}) => {
        
       </div>
 
-      <div className={` xl:grid xl:grid-cols-[2fr,3fr] xl:gap-x-4 my-5 ${
+      <div className={` 3xl:grid 3xl:grid-cols-[2fr,3fr] 3xl:gap-x-4 my-5 ${
        ScrollResponsive && scroll >= height && leftHeight > 1000 ? "scrollFixed showLess" : ScrollResponsive && scroll >= height && leftHeight < 1000 && "scrollFixed showMore"
       }`}>
         <div className='profileLeft' ref={leftProfileHeight}>

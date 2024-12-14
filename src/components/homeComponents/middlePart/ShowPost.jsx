@@ -103,10 +103,10 @@ const ShowPost = ({ post }) => {
                         </Link>
                     </div>
                     <div>
-                        <div className='flex items-center gap-x-1 '>
-                            <h4 className='font-gilroySemiBold text-xs sm:text-base'>
+                        <div className=' '>
+                            <span className='font-gilroySemiBold text-xs sm:text-base mr-1'>
                             <StringWithEllipsis text={post?.user?.userName} maxLength={15}/>
-                            </h4>
+                            </span>
                             {post?.type === "profilePicture" &&
                                 <span className='font-gilroyNormal text-xs sm:text-base text-secondary_color'>updated {post?.user?.gender === "male" ? "his" : "her"} Profile Picture</span>
                             }

@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import avater from '../../assets/defaultImage/avatar.png'
 import { Camera } from '../../svg/Camera'
 import ProfilePicture from './profilePictureUploads'
+import Friends from './userDetails/friends/Friends'
 
 const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }) => {
 
@@ -42,6 +43,8 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
 
                 </div>
 
+                <div className='flex flex-col gap-y-5'>
+                    {profileVisitor && <Friends friendShips={profile?.friendShip} profileId={profile?._id}/>}
                 <div className='flex items-center gap-x-4 sm:gap-x-8 md:gap-x-3 mt-2 md:-mt-4 '>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm '>Friends</h2>
@@ -66,6 +69,7 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
                         <h5 className='font-gilroyBold text-base sm:text-lg'>{imageData ? imageData?.length?.toString().padStart(2, 0) : "0"}</h5>
                     </div>
 
+                </div>
                 </div>
             </div>
 
