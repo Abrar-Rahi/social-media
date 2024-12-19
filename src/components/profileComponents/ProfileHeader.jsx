@@ -43,26 +43,29 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
 
                 </div>
 
-                <div className='flex flex-col gap-y-5'>
+                <div className='flex flex-col items-center md:items-end gap-y-5'>
+                    <div className='mt-3'>
+
                     {profileVisitor && <Friends friendShips={profile?.friendShip} profileId={profile?._id}/>}
+                    </div>
                 <div className='flex items-center gap-x-4 sm:gap-x-8 md:gap-x-3 mt-2 md:-mt-4 '>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm '>Friends</h2>
-                        <h5 className='font-gilroyBold text-base sm:text-lg '>10K</h5>
+                        <h5 className='font-gilroyBold text-base sm:text-lg '>{profile?.friends ? profile?.friends?.length?.toString().padStart(2, 0) : "0"}</h5>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm'>Posts</h2>
 
-                        <h5 className='font-gilroyBold text-base sm:text-lg'>{profile?.wonPost?.length?.toString().padStart(2, 0)}</h5>
+                        <h5 className='font-gilroyBold text-base sm:text-lg'>{profile?.wonPost ? profile?.wonPost?.length?.toString().padStart(2, 0):"0"}</h5>
 
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm'>Followers</h2>
-                        <h5 className='font-gilroyBold text-base sm:text-lg'>10K</h5>
+                        <h5 className='font-gilroyBold text-base sm:text-lg'>{profile?.followers ? profile?.followers?.length?.toString().padStart(2, 0) : "0"}</h5>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm'>Following</h2>
-                        <h5 className='font-gilroyBold text-base sm:text-lg'>10K</h5>
+                        <h5 className='font-gilroyBold text-base sm:text-lg'>{profile?.following ? profile?.following?.length?.toString().padStart(2, 0) : "0"}</h5>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm'>Photos</h2>

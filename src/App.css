@@ -25,7 +25,7 @@ overflow: hidden !important ;
 }
 
 /* fixed Height */
-
+/* 
 .scrollFixed .profileLeft {
     position: fixed;
     
@@ -41,26 +41,26 @@ overflow: hidden !important ;
 }
 .showMore .profileLeft {
     top: 66px;
-}
+} */
 
-/* Adjustments for 1920px and above */
+/* 
 @media (min-width: 1750px) and (max-width: 1820.99px) {
     .scrollFixed .profileLeft {
-      width: 330px; /* Increase width for larger screens */
+      width: 330px; 
     }
   
     .scrollFixed .profileRight {
-      margin-left: 340px; /* Adjust margin to account for wider profileLeft */
-      width: 500px; /* Expand width */
+      margin-left: 340px; 
+      width: 500px; 
     }
   }
 @media (min-width: 1821px) and (max-width: 1920.99px) {
     .scrollFixed .profileLeft {
-      width: 350px; /* Increase width for larger screens */
+      width: 350px; 
     }
   
     .scrollFixed .profileRight {
-      margin-left: 360px; /* Adjust margin to account for wider profileLeft */
-      width: 540px; /* Expand width */
+      margin-left: 360px; 
+      width: 540px; 
     }
-  }
+  } */

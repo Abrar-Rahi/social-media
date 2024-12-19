@@ -60,6 +60,7 @@ const ProfilePage = ({posts,setPostVisible}) => {
 
   
 
+
   return (
     <>
       <Helmet>
@@ -80,7 +81,7 @@ const ProfilePage = ({posts,setPostVisible}) => {
        ScrollResponsive && scroll >= height && leftHeight > 1000 ? "scrollFixed showLess" : ScrollResponsive && scroll >= height && leftHeight < 1000 && "scrollFixed showMore"
       }`}>
         <div className='profileLeft' ref={leftProfileHeight}>
-          <ProfileLeft imageData={imageData} imageLoading={imageLoading} userDetails={profile?.details} profileVisitor={profileVisitor} setNickName={setNickName}/>
+          <ProfileLeft imageData={imageData} imageLoading={imageLoading} userDetails={profile?.details} profileVisitor={profileVisitor} setNickName={setNickName} friends={profile?.friends}/>
         </div>
         <div className='profileRight'>
           <ProfileRight setPostVisible={setPostVisible} posts={posts} profile={profile} profileVisitor={profileVisitor}/>
