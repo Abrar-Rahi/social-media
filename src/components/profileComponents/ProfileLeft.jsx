@@ -14,7 +14,7 @@ const ProfileLeft = ({imageData, imageLoading,userDetails,profileVisitor, setNic
       </div>
 
       <div className='w-full rounded-md bg-white shadow-md p-2 mb-3'>
-        <FriendList friends={friends}/>
+        <FriendList friends={friends} imageLoading={imageLoading}/>
       </div>
     </div>
   )

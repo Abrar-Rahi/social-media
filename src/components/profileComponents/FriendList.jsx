@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import avater from '../../assets/defaultImage/avatar.png'
 import StringWithEllipsis from '../homeComponents/middlePart/StringWithEllipsis'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 
-const FriendList = ({ friends }) => {
+const FriendList = ({ friends, imageLoading }) => {
 
     const friendCount = () => {
         const total_count = friends?.length || 0
@@ -21,27 +22,45 @@ const FriendList = ({ friends }) => {
                         </button>}
                 </div>
                 <span className='font-gilroyNormal text-black text-sm'>
-                    {friendCount()}
+                    {imageLoading ?
+                        <SkeletonTheme baseColor="#f0f2f5" highlightColor="#66717f">
+                            <p>
+                                <Skeleton height={20} count={1} />
+                            </p>
+                        </SkeletonTheme>
+                        :
+                        friendCount()}
                 </span>
+
             </div>
 
+            {imageLoading ?
+                <SkeletonTheme baseColor="#f0f2f5" highlightColor="#66717f">
+                    <p>
+                        <Skeleton height={50} count={6} />
+                    </p>
+                </SkeletonTheme>
+                :
 
-            <div className='grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-2 gap-4 mt-4 min-h-[300px] '>
-                {friends?.length &&
-                    friends?.slice(0, 4).map((friend) => (
-                        <div key={friend?._id} className="flex flex-col ">
-                            <img
-                                src={friend.profilePicture || avater}
-                                alt="photos"
-                                className="w-full h-full object-cover"
-                            />
-                            <h4 className="font-gilroySemiBold text-base cursor-pointer mt-2">
-                            <StringWithEllipsis text={friend?.userName} maxLength={15}/>
-                                
-                            </h4>
-                        </div>
-                    ))}
-            </div>
+                <div className='grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-2 gap-4 mt-4 min-h-[300px] '>
+                    {friends?.length &&
+                        friends?.slice(0, 4).map((friend) => (
+                            <div key={friend?._id} className="flex flex-col ">
+                                <img
+                                    src={friend.profilePicture || avater}
+                                    alt="photos"
+                                    className="w-full h-full object-cover"
+                                />
+                                <h4 className="font-gilroySemiBold text-base cursor-pointer mt-2">
+                                    <StringWithEllipsis text={friend?.userName} maxLength={15} />
+
+                                </h4>
+                            </div>
+                        ))}
+                </div>
+            }
+
+
 
 
         </div>

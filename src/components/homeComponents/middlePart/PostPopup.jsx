@@ -5,7 +5,7 @@ import profileImg from "../../../assets/defaultImage/avatar.png"
 import PostEmojiPicker from './PostEmojiPicker'
 import PostImageViewer from './PostImageViewer'
 import OutSideClick from '../../../functions/click'
-import { useCreatePostMutation, useUploadImageMutation } from '../../../features/api/authApi'
+import { useCreatePostMutation, useGetAllPostQuery, useUploadImageMutation } from '../../../features/api/authApi'
 import { useSelector } from 'react-redux'
 import { PulseLoader } from 'react-spinners'
 import PostError from './PostError'
@@ -18,7 +18,7 @@ const PostPopup = ({ setPostVisible,postVisible }) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const userInfo = useSelector((state) => state.userInformation.userInfo)
-
+    const { refetch: refetchPost } = useGetAllPostQuery();
     const [postText, setPostText] = useState("")
     const [image, setImage] = useState([])
     const [imgPopup, setImgPopupt] = useState(false)
@@ -95,7 +95,7 @@ const PostPopup = ({ setPostVisible,postVisible }) => {
             }
 
             if (response.status === "done") {
-
+                await refetchPost()
                 setLoading(false)
                 setPostText("")
                 setImgBackground("")

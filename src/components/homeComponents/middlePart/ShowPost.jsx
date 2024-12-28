@@ -15,6 +15,10 @@ import EmojiPicker from 'emoji-picker-react';
 import { Cross } from '../../../svg/Cross';
 import PostMenu from './PostMenu';
 import StringWithEllipsis from './StringWithEllipsis';
+import { useCreateCommentMutation, useGetAllReactsQuery, useReactPostMutation, useUploadImageMutation } from '../../../features/api/authApi';
+import { BeatLoader } from 'react-spinners';
+import dataURItoBlob from '../../../helpers/dataURItoBlob';
+import Comments from './Comments';
 
 const ShowPost = ({ post }) => {
     const userInfo = useSelector((state) => state.userInformation.userInfo)
@@ -23,14 +27,79 @@ const ShowPost = ({ post }) => {
     const [showEmojis, setShowEmojis] = useState(false); //for react button
     const [emojiPicker, setEmojiPicker] = useState(false); //for imojiPicker components Implement 
     const [showMenu, setShowMenu] = useState(false); //for react button
+    const [loader, setLoader] = useState(false); //for react button
     const [cursorPosition, setCursorPosition] = useState("")
     const [commentText, setCommentText] = useState("")
     const [commentImage, setCommentImage] = useState("")
     const [commentImgError, setCommentImgError] = useState("")
+    const [commentStore, setCommentStore] = useState([])
+    const [commentCount, setCommentCount] = useState(3)
+    const [saveCheckPost, setSaveCheckPost] = useState()
+    const [reacts, setReacts] = useState()
+    const [check, setCheck] = useState()
+    const [totalReact, setTotalReact] = useState()
 
     const textRef = useRef(null) //for comment box input focus
     const emojiPickerRef = useRef(null);
     const fileRef = useRef(null) // for comment image
+    const [reactPost] = useReactPostMutation()
+    const [createComment] = useCreateCommentMutation()
+    const [uploadImage] = useUploadImageMutation()
+    const { data: getAllReacts } = useGetAllReactsQuery({ postId: post._id })
+
+    const handleReact = async (react) => {
+
+        const previousCheck = check;
+        const previousReacts = [...reacts];
+        const previousTotal = totalReact;
+
+        if (check == react) {
+            setCheck()
+            const index = reacts.findIndex((x) => x.react === check);
+            if (index !== -1) {
+                const updateReacts = reacts.map((r, idx) =>
+                    idx === index ? { ...r, count: r.count - 1 } : r
+                );
+                setReacts(updateReacts);
+                setTotalReact(totalReact - 1);
+            }
+        } else {
+            setCheck(react)
+            const index = reacts.findIndex((x) => x.react === react);
+            const index1 = reacts.findIndex((x) => x.react === check);
+
+            const updateReacts = reacts.map((r, idx) => {
+                if (idx === index) {
+                    return { ...r, count: r.count + 1 };
+                } else if (idx === index1) {
+                    return { ...r, count: r.count - 1 };
+                } else {
+                    return r;
+                }
+            });
+
+            setReacts(updateReacts);
+            setTotalReact(totalReact + (index !== -1 ? 1 : 0) - (index1 !== -1 ? 1 : 0));
+        }
+
+        try {
+            await reactPost({ postId: post._id, react }).unwrap();
+        } catch (error) {
+            setCheck(previousCheck)
+            setReacts(previousReacts)
+            setTotalReact(previousTotal)
+        }
+    }
+
+    useEffect(() => {
+        if (getAllReacts) {
+            setReacts(getAllReacts?.allReacts)
+            setCheck(getAllReacts?.check)
+            setTotalReact(getAllReacts?.total)
+            setSaveCheckPost(getAllReacts?.isPostSave)
+        }
+    }, [getAllReacts])
+
 
     const handleEmoji = ({ emoji }, e) => {
         // e.stopPropagation();
@@ -84,10 +153,57 @@ const ShowPost = ({ post }) => {
 
     }
 
+    const handleComment = async (e) => {
+        try {
+            if (e.key === "Enter") {
+                if (commentImage !== "") {
+                    setLoader(true);
+                    const Images = dataURItoBlob(commentImage);
+                    const path = `${userInfo.userName.replace(/\s+/g, "_")}/post_images/${post._id}`;
+                    const formData = new FormData();
+                    formData.append("path", path);
+                    formData.append("file", Images);
+                    const comment = await uploadImage({ formData, path }).unwrap();
+                    const response = await createComment({
+                        comment: commentText,
+                        image: comment[0].url,
+                        postId: post._id
+                    }).unwrap();
+
+                    setLoader(false)
+                    setCommentStore(response);
+                    setCommentImage("")
+                    setCommentText("")
+                } else {
+                    setLoader(true)
+                    const commentsResult = await createComment({
+                        comment: commentText,
+                        image: null,
+                        postId: post._id
+                    }).unwrap();
+                    setLoader(false)
+                    setCommentStore(commentsResult);
+                    setCommentImage("")
+                    setCommentText("")
+
+                }
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+
+
+    useEffect(() => {
+        setCommentStore(post?.comments)
+    }, [post]);
+
+
     if (!post || !post.user) {
         return null; // or render some fallback UI
     }
-    
+
 
     return (
 
@@ -105,7 +221,7 @@ const ShowPost = ({ post }) => {
                     <div>
                         <div className=' '>
                             <span className='font-gilroySemiBold text-xs sm:text-base mr-1'>
-                            <StringWithEllipsis text={post?.user?.userName} maxLength={15}/>
+                                <StringWithEllipsis text={post?.user?.userName} maxLength={15} />
                             </span>
                             {post?.type === "profilePicture" &&
                                 <span className='font-gilroyNormal text-xs sm:text-base text-secondary_color'>updated {post?.user?.gender === "male" ? "his" : "her"} Profile Picture</span>
@@ -124,7 +240,7 @@ const ShowPost = ({ post }) => {
                     {showMenu &&
 
                         <div>
-                            <PostMenu setShowMenu={setShowMenu} postId={post?.user?._id} userId={userInfo.id} postImeges={post?.image} />
+                            <PostMenu setShowMenu={setShowMenu} postUserId={post?.user?._id} userId={userInfo.id} postImeges={post?.image} postId={post?._id} saveCheckPost={saveCheckPost} setSaveCheckPost={setSaveCheckPost}/>
                         </div>
                     }
                 </div>
@@ -165,34 +281,79 @@ const ShowPost = ({ post }) => {
                                 {post?.image?.slice(0, 4).map((item, index) => (
                                     <img key={index} src={item?.url} alt="postImage" className={`object-cover w-full h-full ${post?.image?.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : post?.image?.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
                                 ))}
-                                
+
 
                                 <div className='absolute bottom-10 right-10'>
-                                {post?.image?.length >= 5 &&
-                                    <div className=' w-12 h-12 sm:w-20 sm:h-20 bg-white text-black rounded-full flex items-center justify-center'>
-                                        <h5 className='font-gilroyBold text-xl sm:text-5xl'>+{post?.image?.length - 4}</h5>
-                                    </div>
-                                }
+                                    {post?.image?.length >= 5 &&
+                                        <div className=' w-12 h-12 sm:w-20 sm:h-20 bg-white text-black rounded-full flex items-center justify-center'>
+                                            <h5 className='font-gilroyBold text-xl sm:text-5xl'>+{post?.image?.length - 4}</h5>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </>
                 }
             </>
+            <div className='flex items-center justify-between my-2 font-gilroyMedium text-sm sm:text-lg mr-2'>
+                <div className='flex items-center gap-x-1'>
+                    <div className='flex items-center'>
+                        {reacts && reacts.slice().sort((a, b) => {
+                            return b.count - a.count;
+                        }).slice(0, 3).map((react, index) =>
+                            react.count > 0 && (
+                                <img key={index}
+                                    src={`/src/assets/reacts/${react.react}.svg`}
+                                    className="w-5"
+                                    alt="react"
+                                />
+                            )
+                        )
+                        }
+                    </div>
+                    <div>
+                        <span className='font-gilroyNormal text-black'>{totalReact > 0 ? totalReact : ""}</span>
+                    </div>
 
-            <div className='text-end my-2 font-gilroyMedium text-sm sm:text-lg mr-2'>
-                <span>12 comments</span>
+                </div>
+                <div className='font-gilroyNormal'>
+                    {commentStore && commentStore.length > 0 ? (
+                        <span>
+                            {commentStore.length} <span className='text-base'>Comments</span>
+                        </span>
+                    )
+                        :
+                        (
+                            ""
+                        )}
+                </div>
             </div>
 
             <div className="relative flex justify-around items-center bg-white text-text_color py-3  border-t border-b border-hober_clr mt-2">
 
                 <button
+                    onClick={() => handleReact(check ? check : "like")}
                     onMouseEnter={() => setShowEmojis(true)}
                     onMouseLeave={() => setShowEmojis(false)}
                     className="flex items-center justify-center gap-x-1 sm:gap-x-2 px-2 sm:px-4 py-2 hover:bg-hober_clr transition-colors duration-300 rounded-lg">
-                    <span className="my-like-icon-class">
-                        <Like />
+                    {check ?
+                        <img className='w-5' src={`/src/assets/reacts/${check}.svg`} alt="react" />
+                        :
+                        <span className="my-like-icon-class">
+                            <Like />
+                        </span>}
+
+                    <span className={`font-gilroyMedium text-sm sm:text-base ${check === "like" ? "text-blue" : ""}
+                    ${check === "love" ? "text-red" : ""}
+                     ${check === "haha" ? "text-yellow" : ""}
+                     ${check === "angry" ? "text-red" : ""}
+                    ${check === "sad" ? "text-yellow" : ""}
+                   ${check === "wow" ? "text-yellow" : ""}`}>
+                        {check ?
+                            check
+                            :
+                            "like"
+                        }
                     </span>
-                    <span className="font-gilroyMedium text-sm sm:text-base">Like</span>
                 </button>
 
                 <div
@@ -203,7 +364,7 @@ const ShowPost = ({ post }) => {
                 >
                     {/* Demo Emojis - Replace with your custom emojis */}
                     <span className="">
-                        <Reacts />
+                        <Reacts handleReact={handleReact} />
                     </span>
                 </div>
 
@@ -221,6 +382,25 @@ const ShowPost = ({ post }) => {
                     <span className="font-gilroyMedium text-sm sm:text-base">Share</span>
                 </button>
             </div>
+
+            <div>
+                {commentStore &&
+                    commentStore.slice().sort((a, b) => new Date(b.commentedAt) - new Date(a.commentedAt)).slice(0, commentCount).map((singleComment) => (
+                        <Comments key={singleComment._id} comment={singleComment} />
+                    ))}
+            </div>
+            {commentCount < commentStore.length &&
+                <div onClick={() => setCommentCount((prev) => prev + 3)} className='mb-2 ml-12 cursor-pointer font-gilroyNormal text-base'>Load More Comments</div>
+            }
+
+            { commentStore.length > 0 && commentCount >= commentStore.length && (
+                <div
+                    onClick={() => setCommentCount(3)}
+                    className="mb-2 ml-12 cursor-pointer font-gilroyNormal text-base"
+                >
+                    Hide Comments
+                </div>
+            )}
 
             <div className="relative flex items-center bg-white p-2 rounded-full  w-full border border-hober_clr">
                 {/* Profile Picture */}
@@ -245,12 +425,13 @@ const ShowPost = ({ post }) => {
                     className="bg-transparent w-full text-text_color font-gilroyNormal placeholder:text-text_color placeholder:text-xs sm:placeholder:text-base focus:outline-none"
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
+                    onKeyUp={handleComment}
 
                 />
 
                 {/* Icon Set */}
                 <div className="flex items-center sm:space-x-4 space-x-1">
-                    {/* Replace with your own icons */}
+                    {loader && <BeatLoader size={5} />}
                     <div
                         className="relative flex items-center justify-center w-8 h-8 text-xl bg-transparent hover:bg-hober_clr rounded-full transition-all duration-200 cursor-pointer emoji-btn"
 

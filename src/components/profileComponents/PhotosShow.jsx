@@ -7,7 +7,7 @@ const PhotosShow = ({ imageData, imageLoading }) => {
 
   const photoCount = () => {
     const total_count = imageData?.total_count || 0
-    return total_count === 0 ? "Loading..." : `${total_count} Photos`
+    return total_count === 0 ? "There is no photo" : `${total_count} Photos`
   }
 
   return (
@@ -21,7 +21,14 @@ const PhotosShow = ({ imageData, imageLoading }) => {
             </button>}
         </div>
         <span className='font-gilroyNormal text-black text-sm'>
-          {photoCount()}
+          {imageLoading ?
+            <SkeletonTheme baseColor="#f0f2f5" highlightColor="#66717f">
+              <p>
+                <Skeleton height={20} count={1} />
+              </p>
+            </SkeletonTheme>
+            :
+            photoCount()}
         </span>
       </div>
       {imageLoading ?

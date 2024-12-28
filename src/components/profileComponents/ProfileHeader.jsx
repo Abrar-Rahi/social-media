@@ -39,7 +39,7 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
 
                 <div className=" md:ml-36 md:-mt-3 flex items-center gap-x-2 md:block">
                     <h1 className="text-black font-gilroyExtraBold text-lg sm:text-xl md:text-2xl">{profile?.fName + " " + profile?.lName}</h1>
-                    <p className="text-secondary_color font-gilroyMedium text-base sm:text-lg">({nickName})</p>
+                    <p className="text-secondary_color font-gilroyMedium text-base sm:text-lg">{nickName ? nickName : "(NickName)"}</p>
 
                 </div>
 

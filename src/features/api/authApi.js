@@ -178,7 +178,30 @@ export const authApi = createApi({
         method: "PUT",
       })
     }),
+    reactPost: builder.mutation({
+      query: ({ postId, react }) => ({
+        url: '/api/v1/react/reactPost',
+        method: 'PUT',
+        body: { postId, react }
+      })
+    }),
+    getAllReacts: builder.query({
+      query: ({postId}) => `/api/v1/react/getAllReacts/${postId}`
+    }),
+    createComment: builder.mutation({
+      query: ({ comment, image, postId }) => ({
+        url: '/api/v1/post/comment',
+        method: 'PUT',
+        body: { comment, image, postId }
+      })
+    }),
+    savePosts: builder.mutation({
+      query: ( postId ) => ({
+        url: `/api/v1/post/savePost/${postId}`,
+        method: 'PUT',
+      })
+    }),
   }),
 })
 
-export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation, useAddFriendsMutation, useCancelFriendReqMutation, useAcceptFriendReqMutation, useDeleteFriendReqMutation, useFollowMutation, useUnFollowMutation, useUnFriendMutation } = authApi
+export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation, useAddFriendsMutation, useCancelFriendReqMutation, useAcceptFriendReqMutation, useDeleteFriendReqMutation, useFollowMutation, useUnFollowMutation, useUnFriendMutation, useReactPostMutation, useGetAllReactsQuery, useCreateCommentMutation, useSavePostsMutation } = authApi
