@@ -1,10 +1,10 @@
-export const Cross = () => {
+export const Cross = ({width,height}) => {
     return (
         <>
             <svg
                 fill="#000"
-                width={17}
-                height={17}
+                width={width}
+                height={height}
                 viewBox="0 0 1024 1024"
                 xmlns="http://www.w3.org/2000/svg"
             >

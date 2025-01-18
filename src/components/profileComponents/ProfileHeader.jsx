@@ -9,7 +9,7 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
     const [visible, setVisible] = useState(false)
     const uploadPhoto = useRef(null)
     
-
+  
 
     return (
 
@@ -33,6 +33,7 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
 
                                 <Camera />
                             </div>
+                
                         }
                     </div>
                 </div>

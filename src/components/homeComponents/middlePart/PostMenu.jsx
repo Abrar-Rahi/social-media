@@ -7,25 +7,41 @@ import { SavePost } from '../../../svg/SavePost'
 import { Download } from '../../../svg/Download'
 import { EnterFullScreen } from '../../../svg/EnterFullScreen'
 import { Trash } from '../../../svg/Trash'
-import { useSavePostsMutation } from '../../../features/api/authApi'
+import { useRemovePostsMutation, useSavePostsMutation } from '../../../features/api/authApi'
+import { saveAs } from "file-saver";
 
-const PostMenu = ({ setShowMenu, postUserId, userId, postImeges, postId, saveCheckPost, setSaveCheckPost  }) => {
+const PostMenu = ({ setShowMenu, postUserId, userId, postImeges, postId, saveCheckPost, setSaveCheckPost }) => {
 
   const menuRef = useRef(null)
   const [SavePosts] = useSavePostsMutation()
+  const [removePosts] = useRemovePostsMutation()
 
   OutSideClick(menuRef, () => {
     setShowMenu(false)
   })
 
-  const handleSavePost = ()=>{
+  const handleSavePost = () => {
     SavePosts(postId)
-    if(saveCheckPost){
+    if (saveCheckPost) {
       setSaveCheckPost(false)
-    }else{
+    } else {
       setSaveCheckPost(false)
     }
+    setShowMenu(false)
   }
+
+  const handleSaveImage = () => {
+    postImeges.map((image) => {
+      saveAs(image.url, image.jpg);
+    })
+    setShowMenu(false)
+  };
+  const handleRemovePost = () => {
+    removePosts(postId)
+    setShowMenu(false)
+  };
+
+
 
   return (
     <div>
@@ -38,18 +54,25 @@ const PostMenu = ({ setShowMenu, postUserId, userId, postImeges, postId, saveChe
         }
         <div onClick={handleSavePost}>
           {saveCheckPost ?
-          <MenuItem icon={SavePost} title='UnSave Post' />
-          :
-          <MenuItem icon={SavePost} title='Save Post' />
+            <MenuItem icon={SavePost} title='UnSave Post' />
+            :
+            <MenuItem icon={SavePost} title='Save Post' />
           }
         </div>
         {postImeges && postImeges.length &&
           <>
-            <MenuItem icon={Download} title='Download' />
+            <div onClick={() => handleSaveImage()}>
+              <MenuItem icon={Download} title='Download' />
+            </div>
             <MenuItem icon={EnterFullScreen} title='Enter Full Screen' />
           </>
         }
-        {postUserId === userId && <MenuItem icon={Trash} title='Remove post' />}
+        {postUserId === userId && 
+        <div onClick={()=>handleRemovePost()}>
+          <MenuItem icon={Trash} title='Remove post' />
+        </div> 
+        }
+          
 
       </div>
     </div>

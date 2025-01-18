@@ -52,7 +52,7 @@ const PostImageViewer = ({ postText, setPostText, image, setImage, imgPopup, set
                             ))}
 
                             <div onClick={() => setImage([])} className='absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center cursor-pointer'>
-                                <Cross />
+                                <Cross width={17} height={17}/>
                             </div>
                             <div onClick={() => fileRef.current.click()} className='absolute top-3 left-3 px-2 py-1.5 bg-white rounded-lg flex items-center gap-x-2 cursor-pointer'>
                                 <div>

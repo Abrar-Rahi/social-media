@@ -20,6 +20,7 @@ import PostPopup from './components/homeComponents/middlePart/PostPopup';
 import { useState } from 'react';
 import { useGetAllPostQuery } from './features/api/authApi';
 import ProfilePage from './pages/profilePage';
+import FriendPage from './pages/friendsPage';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/varification/:token" element={< ActivePage />}></Route>
             <Route path="/profile" element={< ProfilePage setPostVisible={setPostVisible} posts={posts}/>}></Route>
             <Route path="/profile/:userName" element={< ProfilePage />}></Route>
+            <Route path="/friends" element={< FriendPage />}></Route>
           </Route>
         </Route>
         <Route element={<NotLogInUser />}>

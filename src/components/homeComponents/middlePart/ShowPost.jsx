@@ -465,7 +465,7 @@ const ShowPost = ({ post }) => {
                 <div className='relative w-36 h-36 mt-5 ml-2 rounded-sm overflow-hidden'>
                     <img className='w-full h-full object-cover' src={commentImage} alt="comment" />
                     <div onClick={() => setCommentImage("")} className='absolute top-1 right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center cursor-pointer hover:bg-blur hover:scale-110 transition-all duration-150 ease-in-out'>
-                        <Cross />
+                        <Cross width={17} height={17}/>
                     </div>
 
                 </div>

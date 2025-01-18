@@ -201,7 +201,39 @@ export const authApi = createApi({
         method: 'PUT',
       })
     }),
+    removePosts: builder.mutation({
+      query: ( postId ) => ({
+        url: `/api/v1/post/removePost/${postId}`,
+        method: 'DELETE',
+      })
+    }),
+    searchQuery: builder.mutation({
+      query: (searchTerm) => ({
+        url: `/api/v1/auth/search/${searchTerm}`,
+        method: "POST",
+      }),
+    }),
+    addSearchHistory: builder.mutation({
+      query: ( {searchUser} ) => ({
+        url: `/api/v1/auth/addSearchHistory`,
+        method: 'PUT',
+        body: { searchUser }
+      })
+    }),
+    getSearchHistory: builder.query({
+      query: () => "/api/v1/auth/getSearchHistory"
+    }),
+    removeSearchHistory: builder.mutation({
+      query: ( {searchUser} ) => ({
+        url: `/api/v1/auth/removeSearchHistory`,
+        method: 'PUT',
+        body: { searchUser }
+      })
+    }),
+    getAllFriends: builder.query({
+      query: () => "/api/v1/auth/getAllFriends"
+    }),
   }),
 })
 
-export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation, useAddFriendsMutation, useCancelFriendReqMutation, useAcceptFriendReqMutation, useDeleteFriendReqMutation, useFollowMutation, useUnFollowMutation, useUnFriendMutation, useReactPostMutation, useGetAllReactsQuery, useCreateCommentMutation, useSavePostsMutation } = authApi
+export const { useAddUserMutation, useLoggedInUserMutation, useVarifiedUserMutation, useReVarificationMutation, useMatchUserMutation, useResetCodeMutation, useVerifyResetCodeMutation, useChangePasswordMutation, useCreatePostMutation, useUploadImageMutation, useGetAllPostQuery, useGetUserProfileQuery, useImageListMutation, useUploadProfilePictureMutation, useUploadCoverPictureMutation,useUpdateDetailsMutation, useAddFriendsMutation, useCancelFriendReqMutation, useAcceptFriendReqMutation, useDeleteFriendReqMutation, useFollowMutation, useUnFollowMutation, useUnFriendMutation, useReactPostMutation, useGetAllReactsQuery, useCreateCommentMutation, useSavePostsMutation, useRemovePostsMutation, useSearchQueryMutation, useAddSearchHistoryMutation, useGetSearchHistoryQuery, useRemoveSearchHistoryMutation, useGetAllFriendsQuery } = authApi
