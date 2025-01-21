@@ -16,6 +16,7 @@ export default {
     primary_color :"var(--primary_color)",
     secondary_color : "var(--secondary_color)",
     title_color : "var(--title_color)",
+    shadow : "var(--shadow)",
     black : "var(--black)",
     white : "var(--white)",
     green : "var(--green)",
@@ -51,9 +52,17 @@ export default {
       },
       container: {
         center : true
-      }
+      },
+      scrollbar: {
+        width: '4px', 
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
+  variants: {
+    scrollbar: ['rounded'], 
+  },
 }
 

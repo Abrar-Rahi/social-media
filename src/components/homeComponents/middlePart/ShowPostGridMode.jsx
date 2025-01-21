@@ -24,7 +24,7 @@ const ShowPostGridMode = ({ post }) => {
                             </Link>
                         </div>
                         <div >
-                           <h4 className='font-gilroyMedium text-xs'>{post?.user?.fName}</h4>
+                           <h4 className='font-gilroyMedium text-xs text-black'>{post?.user?.fName}</h4>
                             {/* <p className='font-gilroyNormal text-xs text-secondary_color'>{formatDistance(post?.createdAt, new Date(), { addSuffix: true })}</p> */}
                             <p className='font-gilroyNormal text-xs text-secondary_color'>{format(post?.createdAt, "MMMM d 'at' h:mm a")}</p>
                         </div>
@@ -36,12 +36,6 @@ const ShowPostGridMode = ({ post }) => {
                                 {post?.image?.slice(0, 4).map((item, index) => (
                                     <img key={index} src={item.url} alt="postImage" className={`object-cover w-full h-full ${post?.image?.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : post?.image?.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
                                 ))}
-
-                                {/* {post?.image.length >= 5 &&
-                        <div className='absolute bottom-[100px] right-[150px] w-20 h-20 bg-white text-black rounded-full flex items-center justify-center'>
-                            <h5 className='font-gilroyBold text-5xl'>+{post?.image.length - 4}</h5>
-                        </div>
-                    } */}
                             </div>
                         </>
                     }

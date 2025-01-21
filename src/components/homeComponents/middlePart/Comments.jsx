@@ -35,7 +35,7 @@ const Comments = ({ comment }) => {
           </div>
         </div>
       </div>
-      <div className='flex items-center gap-x-3 ml-16 font-gilroyNormal mt-1'>
+      <div className='flex items-center gap-x-3 ml-16 font-gilroyNormal mt-1 text-black'>
         <div className='text-sm font-gilroyNormal text-black'><TimeAgo timestamp={comment.commentedAt} /> </div>
         <div>like</div>
         <div>reple</div>

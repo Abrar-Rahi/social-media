@@ -51,14 +51,14 @@ const PostImageViewer = ({ postText, setPostText, image, setImage, imgPopup, set
                                 <img key={index} src={item} alt="image" className={`object-cover w-full h-full ${image.length === 3 ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3" : image.length === 4 && "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"}`} />
                             ))}
 
-                            <div onClick={() => setImage([])} className='absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center cursor-pointer'>
+                            <div onClick={() => setImage([])} className='absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center cursor-pointer '>
                                 <Cross width={17} height={17}/>
                             </div>
-                            <div onClick={() => fileRef.current.click()} className='absolute top-3 left-3 px-2 py-1.5 bg-white rounded-lg flex items-center gap-x-2 cursor-pointer'>
+                            <div onClick={() => fileRef.current.click()} className='absolute top-3 left-3 px-2 py-1.5 bg-green1 rounded-lg flex items-center gap-x-2 cursor-pointer'>
                                 <div>
                                     <Media />
                                 </div>
-                                <h3 className='font-gilroyBold text-sm'>Add Photos/Video</h3>
+                                <h3 className='font-gilroyBold text-sm '>Add Photos/Video</h3>
                             </div>
                             {image.length >= 5 &&
                                 <div className='absolute -bottom-10 right-20 w-20 h-20 bg-white text-black rounded-full flex items-center justify-center'>
@@ -69,10 +69,10 @@ const PostImageViewer = ({ postText, setPostText, image, setImage, imgPopup, set
 
                         :
                         <div className='relative flex items-center justify-center h-full'>
-                            <div onClick={() => setImgPopupt(false)} className='absolute top-2 right-2 cursor-pointer '>
+                            <div onClick={() => setImgPopupt(false)} className='absolute top-2 right-2 cursor-pointer text-black'>
                                 <CircleCloseIcon />
                             </div>
-                            <div onClick={() => fileRef.current.click()} className='flex flex-col items-center cursor-pointer'>
+                            <div onClick={() => fileRef.current.click()} className='flex flex-col items-center cursor-pointer text-black'>
                                 <div className='w-10 h-10 bg-black text-white rounded-full flex items-center justify-center'>
                                     <Media />
                                 </div>

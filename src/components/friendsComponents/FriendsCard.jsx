@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import avater from "../../assets/defaultImage/avatar.png"
 import StringWithEllipsis from '../homeComponents/middlePart/StringWithEllipsis';
-import { useCancelFriendReqMutation } from '../../features/api/authApi';
+import { useAcceptFriendReqMutation, useCancelFriendReqMutation, useDeleteFriendReqMutation } from '../../features/api/authApi';
+import { useNavigate } from 'react-router-dom';
 
 const FriendsCard = ({ friend, type, refetch }) => {
 
+    
     const [cancleFriendReq] = useCancelFriendReqMutation()
+    const [acceptFriendReq] = useAcceptFriendReqMutation()
+    const [deleteFriendReq] = useDeleteFriendReqMutation()
+    const navigate = useNavigate()
+
 
     const handleCancelFriendReq = async (profileId) => {
         try {
@@ -18,12 +24,39 @@ const FriendsCard = ({ friend, type, refetch }) => {
         }
     }
 
+    const handleAcceptFriendReq = async (profileId) => {
+        try {
+           const res = await acceptFriendReq(profileId).unwrap()
+           
+            if(res.message === "accepted"){
+                refetch()
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleDeleteFriendReq = async (profileId) => {
+        try {
+           const res = await deleteFriendReq(profileId).unwrap()
+            if(res.message === "Request deleted"){
+                refetch()
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleRedirect = (userName)=>{
+        navigate(`/profile/${userName}`)
+    }
+
     return (
-        <div className="p-4 rounded-md shadow-md font-gilroyNormal">
+        <div className="p-4 rounded-md shadow-md shadow-shadow font-gilroyNormal">
             {/* Image Section */}
-            <div className="w-full h-48 overflow-hidden rounded-md">
+            <div onClick={()=>handleRedirect(friend?.userName)} className="w-full h-48 overflow-hidden rounded-md cursor-pointer">
                 <img
-                    src={friend?.profilePicture || avater} // Replace this with the actual image URL
+                    src={friend?.profilePicture || avater} 
                     alt="User"
                     className="w-full h-full object-cover"
                 />
@@ -31,7 +64,7 @@ const FriendsCard = ({ friend, type, refetch }) => {
 
             {/* User Info Section */}
             <div className="text-center mt-2">
-                <div className="text-lg font-semibold">
+                <div onClick={()=>handleRedirect(friend?.userName)} className="text-lg font-semibold cursor-pointer">
                     <StringWithEllipsis text={friend?.userName || "no name"} maxLength={15} />
                 </div>
                 <p className="text-sm text-gray-400">52 mutual friends</p>
@@ -40,10 +73,10 @@ const FriendsCard = ({ friend, type, refetch }) => {
             {/* Buttons Section */}
             {type === "friendRequest" ?
                 <div className="font-gilroyMedium text-white flex flex-col gap-2 text-base mt-2">
-                    <button className="bg-green py-2 rounded-md ">
+                    <button onClick={()=>handleAcceptFriendReq(friend?._id)} className="bg-green py-2 rounded-md ">
                         Confirm
                     </button>
-                    <button className="bg-red py-2 rounded-md ">
+                    <button onClick={() => handleDeleteFriendReq(friend?._id)} className="bg-red py-2 rounded-md ">
                         Delete
                     </button>
                 </div>

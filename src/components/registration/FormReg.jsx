@@ -86,7 +86,7 @@ const FormReg = () => {
 
   return (
 
-    <div className='w-full rounded-md lg:shadow-md px-5 md:px-16 lg:px-10 lg:py-5 box-boreder'>
+    <div className='w-full rounded-md lg:shadow-md shadow-shadow px-5 md:px-16 lg:px-10 lg:py-5 box-boreder'>
       <div>
         <form onSubmit={formik.handleSubmit}>
 

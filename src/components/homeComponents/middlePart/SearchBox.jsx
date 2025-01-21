@@ -68,7 +68,7 @@ const SearchBox = () => {
     };
 
     return (
-        <div className='max-h-[70vh] min-h-[400px] box-border bg-white  w-auto shadow-xl rounded-sm px-3 pb-3 overflow-y-auto '>
+        <div className='max-h-[70vh] min-h-[400px] box-border bg-white  w-auto shadow-xl shadow-shadow rounded-sm px-3 pb-3 overflow-y-auto '>
             <div className='w-full sticky left-0 top-0 bg-white'>
 
                 <div className='flex items-center gap-1  border border-secondary_color  py-2 px-4 rounded-full cursor-pointer '>
@@ -80,7 +80,7 @@ const SearchBox = () => {
                             ref={inputBox}
                             type="text"
                             placeholder='Search'
-                            className='focus:outline-none font-gilroyNormal'
+                            className='focus:outline-none font-gilroyNormal bg-white'
                             onFocus={() => setIconView(false)}
                             onBlur={() => setIconView(true)}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -122,7 +122,7 @@ const SearchBox = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div onClick={() => handleRemoveSearchHistory(singleUser?.user?._id)} className='flex items-center justify-center hover:bg-line_color rounded-full p-2 ease-linear duration-150 cursor-pointer'>
+                        <div onClick={() => handleRemoveSearchHistory(singleUser?.user?._id)} className='flex items-center justify-center hover:bg-line_color rounded-full p-2 ease-linear duration-150 cursor-pointer text-black'>
                             <Cross width={14} height={14}/>
                         </div>
                     </div>

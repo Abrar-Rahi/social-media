@@ -8,7 +8,7 @@ const EditBio = ({ setEditBioOption, info, handleChange, name, max, handleUpdate
         {relation ?
           <select
             onChange={handleChange} value={info?.relationShip} name={name}
-            class="block w-full p-2 font-gilroyNormal border border-title_color rounded-md shadow-sm outline-none"
+            class="block w-full p-2 font-gilroyNormal border border-title_color rounded-md shadow-sm shadow-shadow outline-none"
           >
             <option value='Select A relationship Status'>Select relationship Status</option>
             <option value='Single'>Single</option>
@@ -20,7 +20,7 @@ const EditBio = ({ setEditBioOption, info, handleChange, name, max, handleUpdate
 
           :
 
-          <textarea onChange={handleChange} value={info?.[name]} name={name} maxLength={30} placeholder={placeholder} className='w-full h-24 shadow-sm outline-none resize-none p-1 border rounded-md border-title_color box-border font-gilroyNormal text-sm text-secondary_color' />
+          <textarea onChange={handleChange} value={info?.[name]} name={name} maxLength={30} placeholder={placeholder} className='w-full h-24 shadow-sm shadow-shadow outline-none resize-none p-1 border rounded-md border-title_color box-border font-gilroyNormal text-sm text-secondary_color' />
         }
       </div>
       {!detail &&

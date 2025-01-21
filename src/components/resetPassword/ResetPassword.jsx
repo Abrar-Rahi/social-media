@@ -27,7 +27,7 @@ const ResetPassword = ({userInfo,setSuccess,success,setError,error,setVisible,se
     }
 
   return (
-    <div className='w-auto h-auto px-20 py-10 bg-white rounded-lg shadow-lg'>
+    <div className='w-auto h-auto px-20 py-10 bg-white rounded-lg shadow-lg shadow-shadow'>
                     <h3 className='font-gilroySemiBold text-xl text-black'>Reset Password</h3>
                     <div className='w-full h-[1px] bg-hober_clr my-3'></div>
                     <p className='font-gilroyNormal text-sm text-black w-80'>How Do You Want To Receive The Code To Reset Your Password?</p>

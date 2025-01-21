@@ -56,10 +56,10 @@ const ProfilePicture = ({ setVisible, uploadPhoto, imageData, userInfo }) => {
 
                 {image ? <UploadPP setImage={setImage} UploadPopupRef={UploadPopupRef} image={image} uploadPhoto={uploadPhoto} setVisible={setVisible} />
                     :
-                    <div ref={UploadPopupRef} className='relative w-[75%] md:w-4/6 lg:w-3/6 bg-white shadow-md rounded-lg'>
+                    <div ref={UploadPopupRef} className='relative w-[75%] md:w-4/6 lg:w-3/6 bg-white shadow-md shadow-shadow rounded-lg'>
                         <div className='border-b border-title_color p-5  relative'>
                             <h3 className='font-gilroyBold text-lg text-black text-center'>Upload Your Photo</h3>
-                            <div onClick={() => setVisible(false)} className='absolute top-5 right-4 cursor-pointer'>
+                            <div onClick={() => setVisible(false)} className='absolute top-5 right-4 cursor-pointer text-black'>
                                 <CircleCloseIcon />
                             </div>
                         </div>

@@ -17,10 +17,12 @@ import 'swiper/css';
 import ActivePage from './pages/home/ActivePage';
 import ForgetPassword from './pages/forgetPassword';
 import PostPopup from './components/homeComponents/middlePart/PostPopup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetAllPostQuery } from './features/api/authApi';
 import ProfilePage from './pages/profilePage';
 import FriendPage from './pages/friendsPage';
+import NotFound from './pages/notFoundPage';
+import { useSelector } from 'react-redux';
 
 
 
@@ -30,6 +32,9 @@ function App() {
   const [postVisible,setPostVisible] = useState(false)
 
   const {data : posts} = useGetAllPostQuery()
+
+  const theme = useSelector(state => state.themeMode.mode)
+  
   
 
   const router = createBrowserRouter(
@@ -49,9 +54,19 @@ function App() {
           <Route path="/login" element={< Login />}></Route>
         </Route>
         <Route path="/forgetPassword" element={< ForgetPassword />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Route>
     )
   );
+
+  useEffect(() => {
+    if (theme) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
   return (
     <>
     {postVisible && <PostPopup setPostVisible={setPostVisible} postVisible={postVisible} />}

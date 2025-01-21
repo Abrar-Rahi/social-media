@@ -30,7 +30,29 @@
     --pink-100 : #fce7f3;
     --cyan-100 : #cffafe;
     --white-100 : #efe4eb;
+    --shadow : rgba(128, 128, 128, 0.2)
 }
+
+body {
+    background-color: var(--main_bg);
+  }
+  
+  .dark {
+    --main_bg: #212121;
+    --black: white;
+    --white: #212121;
+    --page_color : #363434;
+    --input_color : #373535;
+    --line_color : #353535;
+    --secondary_bg : #9fc6e1;
+    --hober_clr : #3a3a3e;
+    --blur : rgba(54, 52, 52, 0.8);
+    --text_color : #dfdfdf;
+    --purple-100 : #413c45;
+    --pink-100 : #3d343a;
+    --cyan-100 : #334142;
+    --white-100 : #484145;
+  }
 
 
 @font-face {

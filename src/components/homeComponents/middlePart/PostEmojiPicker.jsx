@@ -45,7 +45,7 @@ const PostEmojiPicker = ({ postText, setPostText, changePart, imgBackground, set
                     onChange={(e) => setPostText(e.target.value)}
                     value={postText} ref={textRef}
                     placeholder="What's On Your Mind"
-                    className="w-full outline-none resize-none p-3 font-gilroyNormal text-lg bg-transparent"
+                    className="w-full outline-none resize-none p-3 font-gilroyNormal text-lg bg-transparent text-black"
                     style={{
                         paddingTop: `${imgBackground ? Math.abs(textRef.current.value.length * 0.1 - 25) : "0"}%`
                     }}

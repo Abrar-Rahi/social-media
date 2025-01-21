@@ -207,7 +207,7 @@ const ShowPost = ({ post }) => {
 
     return (
 
-        <div className='w-full shadow-md rounded-md px-2 sm:px-3 py-5 mb-5'>
+        <div className='w-full shadow-md shadow-shadow rounded-md px-2 sm:px-3 py-5 mb-5'>
             <div className='flex items-center justify-between '>
                 <div className='flex items-center gap-x-2 '>
                     <div className='w-12 h-12 rounded-full overflow-hidden'>
@@ -220,9 +220,9 @@ const ShowPost = ({ post }) => {
                     </div>
                     <div>
                         <div className=' '>
-                            <span className='font-gilroySemiBold text-xs sm:text-base mr-1'>
+                            <Link to={`/profile/${post?.user?.userName}`} className='font-gilroySemiBold text-xs sm:text-base mr-1 text-black'>
                                 <StringWithEllipsis text={post?.user?.userName} maxLength={15} />
-                            </span>
+                            </Link>
                             {post?.type === "profilePicture" &&
                                 <span className='font-gilroyNormal text-xs sm:text-base text-secondary_color'>updated {post?.user?.gender === "male" ? "his" : "her"} Profile Picture</span>
                             }
@@ -315,7 +315,7 @@ const ShowPost = ({ post }) => {
                     </div>
 
                 </div>
-                <div className='font-gilroyNormal'>
+                <div className='font-gilroyNormal text-black'>
                     {commentStore && commentStore.length > 0 ? (
                         <span>
                             {commentStore.length} <span className='text-base'>Comments</span>
@@ -390,13 +390,13 @@ const ShowPost = ({ post }) => {
                     ))}
             </div>
             {commentCount < commentStore.length &&
-                <div onClick={() => setCommentCount((prev) => prev + 3)} className='mb-2 ml-12 cursor-pointer font-gilroyNormal text-base'>Load More Comments</div>
+                <div onClick={() => setCommentCount((prev) => prev + 3)} className='mb-2 ml-12 cursor-pointer font-gilroyNormal text-base text-black'>Load More Comments</div>
             }
 
             { commentStore.length > 0 && commentCount >= commentStore.length && (
                 <div
                     onClick={() => setCommentCount(3)}
-                    className="mb-2 ml-12 cursor-pointer font-gilroyNormal text-base"
+                    className="mb-2 ml-12 cursor-pointer font-gilroyNormal text-base text-black"
                 >
                     Hide Comments
                 </div>
@@ -430,7 +430,7 @@ const ShowPost = ({ post }) => {
                 />
 
                 {/* Icon Set */}
-                <div className="flex items-center sm:space-x-4 space-x-1">
+                <div className="flex items-center sm:space-x-4 space-x-1 text-black">
                     {loader && <BeatLoader size={5} />}
                     <div
                         className="relative flex items-center justify-center w-8 h-8 text-xl bg-transparent hover:bg-hober_clr rounded-full transition-all duration-200 cursor-pointer emoji-btn"

@@ -23,13 +23,13 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
                         <div 
                         ref={uploadPhoto} 
                         style={{backgroundImage:`url(${profile?.profilePicture || avater})`, backgroundSize:"cover", backgroundRepeat:"no-repeat", backgroundPosition:"center"}} 
-                        className='w-32 h-32 sm:w-44 sm:h-44 md:w-32 md:h-32 rounded-full border-4 border-white shadow-md object-cover'>
+                        className='w-32 h-32 sm:w-44 sm:h-44 md:w-32 md:h-32 rounded-full border-4 border-white shadow-md shadow-shadow object-cover'>
                        
                         </div>
                         {profileVisitor ?
                             ""
                             :
-                            <div onClick={() => setVisible(true)} className='absolute bottom-[1px] sm:bottom-[6px] md:bottom-[1px] right-[6px] sm:right-[14px] md:right-[6px] w-9 h-9 sm:w-10 sm:h-10 md:w-9 md:h-9 rounded-full bg-white flex items-center justify-center cursor-pointer hover:bg-input_color'>
+                            <div onClick={() => setVisible(true)} className='absolute bottom-[1px] sm:bottom-[6px] md:bottom-[1px] right-[6px] sm:right-[14px] md:right-[6px] w-9 h-9 sm:w-10 sm:h-10 md:w-9 md:h-9 rounded-full bg-white flex items-center justify-center cursor-pointer hover:bg-input_color text-black'>
 
                                 <Camera />
                             </div>
@@ -49,7 +49,7 @@ const ProfileHeader = ({ profile, profileVisitor,imageData, userInfo, nickName }
 
                     {profileVisitor && <Friends friendShips={profile?.friendShip} profileId={profile?._id}/>}
                     </div>
-                <div className='flex items-center gap-x-4 sm:gap-x-8 md:gap-x-3 mt-2 md:-mt-4 '>
+                <div className='flex items-center gap-x-4 sm:gap-x-8 md:gap-x-3 mt-2 md:-mt-4 text-black '>
                     <div className='flex flex-col justify-center items-center'>
                         <h2 className='font-gilroyBold text-xs sm:text-sm '>Friends</h2>
                         <h5 className='font-gilroyBold text-base sm:text-lg '>{profile?.friends ? profile?.friends?.length?.toString().padStart(2, 0) : "0"}</h5>

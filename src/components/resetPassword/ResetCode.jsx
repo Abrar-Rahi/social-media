@@ -34,7 +34,7 @@ const ResetCode = ({ userInfo, setSuccess, success, setError, error, setVisible,
 
     const { errors, touched } = formik
     return (
-        <div className='w-auto h-auto px-20 py-10 bg-white rounded-lg shadow-lg'>
+        <div className='w-auto h-auto px-20 py-10 bg-white rounded-lg shadow-lg shadow-shadow'>
             <h3 className='font-gilroySemiBold text-xl text-black'>Code Varification</h3>
             <div className='w-full h-[1px] bg-hober_clr my-3'></div>
             <p className='font-gilroyNormal text-sm text-black'>Please Enter code that been sent your email</p>

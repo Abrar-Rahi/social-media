@@ -32,7 +32,7 @@ const EditDetails = ({ visible, setVisible, details, info, handleChange, handleU
     return (
         <>
             <div className='w-full h-screen bg-blur z-50 fixed top-0 left-0 flex items-center justify-center'>
-                <div ref={UploadPopupRef} className='relative w-[75%] md:w-3/6 xl:w-2/6  bg-white z-100 shadow-md rounded-lg'>
+                <div ref={UploadPopupRef} className='relative w-[75%] md:w-3/6 xl:w-2/6  bg-white z-100 shadow-md shadow-shadow rounded-lg'>
                     <div className='border-b border-title_color p-5 flex items-center justify-between'>
                         <h3 className='font-gilroyBold text-lg text-black text-center '>Customise Your Details</h3>
                         <div onClick={() => setVisible(false)} className=' cursor-pointer'>

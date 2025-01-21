@@ -109,7 +109,7 @@ const Friends = ({ friendShips, profileId }) => {
                         </div>
                         <div ref={friendMenuRef}>
                             {friendMenu && (
-                                <div className="absolute top-12 right-0 w-56 bg-white shadow-md rounded-md p-3">
+                                <div className="absolute top-12 right-0 w-56 bg-white shadow-md shadow-shadow rounded-md p-3">
                                     <div onClick={() => handleUnFriend()} className="flex items-center gap-x-1 text-black cursor-pointer hover:bg-white-100 px-3 py-2">
                                         <UnFollow width={18} height={18} />
                                         <span className="font-gilroyMedium text-sm">Unfriend</span>

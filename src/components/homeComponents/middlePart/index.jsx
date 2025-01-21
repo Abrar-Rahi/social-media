@@ -30,12 +30,12 @@ const MiddlePart = ({ setPostVisible, posts }) => {
                 ref={inputFocus}
                 type="text"
                 placeholder="What's On Your Mind"
-                className='px-5 py-3 w-full rounded-full outline-none font-gilroyNormal text-sm sm:text-base cursor-pointer hover:bg-cyan-100'
+                className='px-5 py-3 w-full rounded-full outline-none font-gilroyNormal text-sm sm:text-base cursor-pointer hover:bg-cyan-100 bg-white'
               />
             </div>
           </div>
           <div className='w-full h-px bg-white my-5'></div>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between text-secondary_color'>
             <div className='flex items-center gap-x-1 sm:gap-x-2 cursor-pointer'>
               <div>  <LiveIcon />  </div>
               <h4 className='font-gilroySemiBold text-sm sm:text-base'>Live Video</h4>

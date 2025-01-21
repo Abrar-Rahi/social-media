@@ -18,7 +18,7 @@ const LeftOtherData = ({ data }) => {
     return (
         <>
             {data.title == "Settings" ?
-                <div className='relative'>
+                <div className='relative '>
                     <div onClick={()=>setSettingPopup(true)} className={`flex w-12 h-12 lg:h-auto items-center justify-center lg:justify-normal lg:gap-x-2 lg:mb-8 group hover:bg-black cursor-pointer lg:px-6 lg:py-3 rounded-full lg:w-auto lg:mx-auto transition-all ease-linear duration-300 ${settingPopup && 'bg-black cursor-not-allowed'}`}>
                         <div className={`group-hover:text-white transition-all ease-linear duration-300 ${settingPopup && 'text-white'}`}>
                             <IconData />
@@ -27,7 +27,7 @@ const LeftOtherData = ({ data }) => {
                             <p className={`font-giloryMedium text-lg text-black group-hover:text-white transition-all ease-linear duration-300 ${settingPopup && 'text-white'}`}>{data.title}</p>
                         </div>
                     </div>
-                    {settingPopup && <div ref={clickOutside} className='absolute top-[52px] left-[-136px] lg:left-[40px] '><SettingOption/></div>}
+                    {settingPopup && <div ref={clickOutside} className='absolute top-[52px] left-[-136px] lg:-left-[10px] '><SettingOption/></div>}
                 </div>
                 :
     

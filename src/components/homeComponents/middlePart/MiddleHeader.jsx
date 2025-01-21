@@ -42,7 +42,7 @@ const MiddleHeader = () => {
     return (
         <>
             <div className='flex items-center justify-between bg-white md:px-3 py-8 '>
-                <div className='w-3/5 hidden lg:block font-gilroyBold text-2xl'>{profileRouteName()}</div>
+                <div className='w-3/5 hidden lg:block font-gilroyBold text-2xl text-black'>{profileRouteName()}</div>
                 <Link to={'/profile'}>
                 <div className='w-14 h-14 md:w-20 md:h-20 rounded-full bg-cyan-100 lg:hidden cursor-pointer' style={{ backgroundImage: `url(${userInfo?.profilePicture})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div></Link>
                 <div className='w-4/6 flex flex-wrap sm:justify-between gap-1 lg:hidden'>

@@ -112,18 +112,18 @@ const PostPopup = ({ setPostVisible,postVisible }) => {
 
     return (
         <div className='w-full h-screen bg-blur z-[60] fixed top-0 left-0 flex items-center justify-center'>
-            <div ref={postPopupRef} className='relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] bg-white shadow-md rounded-lg'>
+            <div ref={postPopupRef} className='relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] bg-white shadow-md shadow-shadow rounded-lg'>
                 {error && <PostError error={error} setError={setError} />}
                 <div className='border-b border-title_color p-5  relative'>
                     <h3 className='font-gilroyBold text-lg text-black text-center'>CreatePost</h3>
-                    <div onClick={() => setPostVisible(false)} className='absolute top-5 right-4 cursor-pointer'>
+                    <div onClick={() => setPostVisible(false)} className='absolute top-5 right-4 cursor-pointer text-black'>
                         <CircleCloseIcon />
                     </div>
                 </div>
                 <div className=' px-3 py-5  '>
                     <div className='flex items-center gap-x-2'>
                         <img src={userInfo.profilePicture || profileImg} className='w-10 h-10 bg-secondary_color rounded-full' />
-                        <h4 className='font-gilroyBold text-lg'>{userInfo.userName}</h4>
+                        <h4 className='font-gilroyBold text-lg text-black'>{userInfo.userName}</h4>
                     </div>
                     {imgPopup ?
                         <>
@@ -142,7 +142,7 @@ const PostPopup = ({ setPostVisible,postVisible }) => {
                     }
                     <div className='w-full text-center mt-3'>
                         {postText == "" && (!imgPopup) ?
-                            <button disabled className='py-2 bg-hober_clr w-full font-gilroySemiBold text-lg rounded-md cursor-not-allowed'>Post</button>
+                            <button disabled className='py-2 bg-hober_clr w-full font-gilroySemiBold text-lg rounded-md cursor-not-allowed text-black'>Post</button>
                             :
                             loading == true ?
                                 <button className='py-2 bg-hober_clr w-full font-gilroySemiBold text-lg rounded-md hover:bg-black transition-all ease-linear duration-100 hover:text-white'>
@@ -150,7 +150,7 @@ const PostPopup = ({ setPostVisible,postVisible }) => {
                                 </button>
                                 :
 
-                                <button onClick={handlePostSubmission} className='py-2 bg-hober_clr w-full font-gilroySemiBold text-lg rounded-md hover:bg-black transition-all ease-linear duration-100 hover:text-white'>Post</button>
+                                <button onClick={handlePostSubmission} className='py-2 bg-title_color w-full font-gilroySemiBold text-lg text-black rounded-md hover:bg-black transition-all ease-linear duration-100 hover:text-white'>Post</button>
 
 
                         }

@@ -79,8 +79,8 @@ const UploadPP = ({ setImage, UploadPopupRef, image, uploadPhoto, setVisible }) 
                 if (profilePicPost.status === "done") {
                     setLoading(false)
                     uploadPhoto.current.style.backgroundImage = `url(${resProfilePic[0].url})`
-                    localStorage.setItem('user', JSON.stringify({...userInfo, profilePicture: resProfilePic[0].url}))
-                    dispatch(logInUsers({...userInfo, profilePicture: resProfilePic[0].url}))
+                    localStorage.setItem('user', JSON.stringify({ ...userInfo, profilePicture: resProfilePic[0].url }))
+                    dispatch(logInUsers({ ...userInfo, profilePicture: resProfilePic[0].url }))
                     setVisible(false)
                     setImage("")
                 }
@@ -92,15 +92,15 @@ const UploadPP = ({ setImage, UploadPopupRef, image, uploadPhoto, setVisible }) 
     }
 
     return (
-        <div ref={UploadPopupRef} className='relative w-2/6 h-[800px] bg-white shadow-md rounded-lg p-5'>
+        <div ref={UploadPopupRef} className='relative w-2/6 h-[800px] bg-white shadow-md shadow-shadow rounded-lg p-5'>
             <div className='border-b border-white-100 p-5  relative'>
                 <h3 className='font-gilroyBold text-lg text-black text-center'>Upload Your Photo</h3>
-                <div onClick={() => setImage("")} className='absolute top-5 right-4 cursor-pointer'>
+                <div onClick={() => setImage("")} className='absolute top-5 right-4 cursor-pointer text-black'>
                     <CircleCloseIcon />
                 </div>
             </div>
             <textarea
-                className='w-full h-32 outline-none mt-3 border border-white-100 p-2 resize-none font-gilroyNormal text-black placeholder:font-gilroyNormal mb-4'
+                className='w-full h-32 outline-none mt-3 border border-white-100 p-2 resize-none font-gilroyNormal text-black placeholder:font-gilroyNormal mb-4 bg-white'
                 placeholder={`what's on your mind`}
                 onChange={(e) => setText(e.target.value)}
             ></textarea>
@@ -121,7 +121,7 @@ const UploadPP = ({ setImage, UploadPopupRef, image, uploadPhoto, setVisible }) 
                 {/* Zoom In Button */}
                 <div
                     onClick={handleZoomIn}
-                    className='w-9 h-9 bg-hober_clr rounded-full flex items-center justify-center cursor-pointer hover:bg-white-100 shadow-lg transition duration-150 ease-in-out transform hover:scale-110'
+                    className='w-9 h-9 bg-hober_clr rounded-full flex items-center justify-center cursor-pointer hover:bg-white-100 shadow-lg shadow-shadow transition duration-150 ease-in-out transform hover:scale-110 text-black'
                 >
                     <Plus className="text-xl text-black" />
                 </div>
@@ -160,19 +160,19 @@ const UploadPP = ({ setImage, UploadPopupRef, image, uploadPhoto, setVisible }) 
                 {/* Zoom Out Button */}
                 <div
                     onClick={handleZoomOut}
-                    className='w-9 h-9 bg-hober_clr rounded-full flex items-center justify-center cursor-pointer hover:bg-white-100 shadow-lg transition duration-150 ease-in-out transform hover:scale-110'
+                    className='w-9 h-9 bg-hober_clr rounded-full flex items-center justify-center cursor-pointer hover:bg-white-100 shadow-lg shadow-shadow transition duration-150 ease-in-out transform hover:scale-110 text-black text-xl'
                 >
-                    <Minus className="text-xl text-black" />
+                    <Minus />
                 </div>
             </div>
 
             <div className='flex items-center justify-end gap-x-3 mt-7'>
                 <button disabled={loading} onClick={() => handleCropedImage("show")} className='py-2 px-4 bg-red text-white font-gilroyMedium text-base rounded-md cursor-pointer'>Crop Image</button>
-               
-                    <button  onClick={() => handleUploadPP()} className={`py-2 px-4 bg-blue text-white font-gilroyMedium text-base rounded-md cursor-pointer ${loading && "cursor-wait"}`}>
-                        {loading ? <BeatLoader color='#fff' size={5} /> : "Upload"}
-                    </button>
-                
+
+                <button onClick={() => handleUploadPP()} className={`py-2 px-4 bg-blue text-white font-gilroyMedium text-base rounded-md cursor-pointer ${loading && "cursor-wait"}`}>
+                    {loading ? <BeatLoader color='#fff' size={5} /> : "Upload"}
+                </button>
+
             </div>
 
         </div>

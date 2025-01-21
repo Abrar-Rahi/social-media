@@ -17,7 +17,7 @@ const ReAuth = ({userInfo}) => {
 
   return (
     <div>
-        <div className='w-full p-4 mt-5 shadow-lg bg-hober_clr rounded-md'>
+        <div className='w-full p-4 mt-5 shadow-lg shadow-shadow bg-hober_clr rounded-md'>
              <h5 className='font-gilroyNormal text-base'>Please Go to your Email and varify your Account. If you re send varify email please 
              <span onClick={resendEmailVarification} className='text-blue hover:underline cursor-pointer ml-1'>Click Here</span>
              </h5>

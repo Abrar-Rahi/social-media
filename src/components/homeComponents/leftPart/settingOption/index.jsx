@@ -26,7 +26,7 @@ const SettingOption = () => {
   return (
     <>
       
-        <div className={`w-[200px] px-2.5 py-6 rounded-md shadow-md bg-white ${logOutPopup && "border border-red"}`}>
+        <div className={`w-[200px] px-2.5 py-6 rounded-md shadow-md shadow-shadow bg-white ${logOutPopup && "border border-red"}`}>
           {logOutPopup ? 
           <>
           <h4 className='font-gilroyBold text-base text-red'>Are You Sure You Want To Logout?</h4>

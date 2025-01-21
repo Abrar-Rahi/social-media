@@ -2,7 +2,7 @@ export const Cross = ({width,height}) => {
     return (
         <>
             <svg
-                fill="#000"
+                fill="#e54953"
                 width={width}
                 height={height}
                 viewBox="0 0 1024 1024"

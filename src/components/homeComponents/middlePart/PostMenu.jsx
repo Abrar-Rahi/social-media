@@ -45,7 +45,7 @@ const PostMenu = ({ setShowMenu, postUserId, userId, postImeges, postId, saveChe
 
   return (
     <div>
-      <div ref={menuRef} className='absolute top-10 right-2 w-[200px] sm:w-[300px] bg-white shadow-md px-3 py-5 z-10 '>
+      <div ref={menuRef} className='absolute top-10 right-2 w-[200px] sm:w-[300px] bg-white shadow-md shadow-shadow px-3 py-5 z-10 text-black'>
         {postUserId === userId &&
           <>
             <MenuItem icon={PinPost} title='Pin Post' />

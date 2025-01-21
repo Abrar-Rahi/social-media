@@ -8,7 +8,7 @@ const StringWithEllipsis = ({ text, maxLength }) => {
 
   return (
     <div
-      style={{ position: "relative", display: "inline-block", cursor: "pointer" }}
+      style={{ position: "relative", display: "inline-block", }}
       
       onMouseEnter={() => setIsHovered( true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -21,13 +21,12 @@ const StringWithEllipsis = ({ text, maxLength }) => {
         <div
           style={{
             position: "absolute",
-            background: "white",
-            color: "black",
+            color: "#848f95",
             padding: "2px",
             top: "100%", // Adjust positioning based on your needs
             left: "100px",
             whiteSpace: "nowrap",
-            zIndex: 10,  
+            zIndex: 100,  
             
           }}
         >
