@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import Feeling from '../../../svg/Feeling'
 import EmojiPicker from 'emoji-picker-react'
 import postbg from './postbg'
+import { useSelector } from 'react-redux'
 
 
 const PostEmojiPicker = ({ postText, setPostText, changePart, imgBackground, setImgBackground }) => {
+
+    const theme = useSelector(state => state.themeMode.mode)
 
     const [emojiPicker, setEmojiPicker] = useState(false)
     const [cursorPosition, setCursorPosition] = useState()
@@ -60,7 +63,7 @@ const PostEmojiPicker = ({ postText, setPostText, changePart, imgBackground, set
                             <Feeling />
                         </div>
                         <div className='absolute top-7 -right-48 z-10 '>
-                            {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
+                            {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} theme={theme ? "dark" : "light"}/>}
                         </div>
                     </div>
                 </div>
@@ -86,7 +89,7 @@ const PostEmojiPicker = ({ postText, setPostText, changePart, imgBackground, set
                                 <Feeling />
                             </div>
                             <div className='absolute bottom-7 -right-6 xl:-right-48'>
-                                {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
+                                {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} theme={theme ? "dark" : "light"}/>}
                             </div>
                         </div>
                     </div>

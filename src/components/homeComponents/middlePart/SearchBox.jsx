@@ -80,7 +80,7 @@ const SearchBox = () => {
                             ref={inputBox}
                             type="text"
                             placeholder='Search'
-                            className='focus:outline-none font-gilroyNormal bg-white'
+                            className='focus:outline-none font-gilroyNormal bg-white text-black'
                             onFocus={() => setIconView(false)}
                             onBlur={() => setIconView(true)}
                             onChange={(e) => setSearchTerm(e.target.value)}

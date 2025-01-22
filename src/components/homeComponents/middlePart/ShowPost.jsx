@@ -22,6 +22,8 @@ import Comments from './Comments';
 
 const ShowPost = ({ post }) => {
     const userInfo = useSelector((state) => state.userInformation.userInfo)
+    const theme = useSelector(state => state.themeMode.mode)
+
 
 
     const [showEmojis, setShowEmojis] = useState(false); //for react button
@@ -46,7 +48,6 @@ const ShowPost = ({ post }) => {
     const [createComment] = useCreateCommentMutation()
     const [uploadImage] = useUploadImageMutation()
     const { data: getAllReacts } = useGetAllReactsQuery({ postId: post._id })
-
     const handleReact = async (react) => {
 
         const previousCheck = check;
@@ -443,7 +444,7 @@ const ShowPost = ({ post }) => {
                         </div>
 
                         <div ref={emojiPickerRef} className='absolute bottom-11 -right-16'>
-                            {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} />}
+                            {emojiPicker && <EmojiPicker onEmojiClick={handleEmoji} theme={theme ? "dark" : "light"}/>}
                         </div>
                     </div>
                     <div
